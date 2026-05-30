@@ -18,7 +18,7 @@ export default function Programmi() {
   return (
     <section
       id="programmi"
-      className="border-t border-white/10 py-32 sm:py-40"
+      className="border-t border-white/10 py-20 sm:py-32 lg:py-40"
     >
       <Container>
         <Reveal>
@@ -37,7 +37,7 @@ export default function Programmi() {
         <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* CARD A — Customer Generation */}
           <Reveal
-            className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-8 sm:p-10"
+            className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8 lg:p-10"
           >
             <div id="customer-generation" className="scroll-mt-24">
               <h3 className="text-2xl font-bold tracking-tight sm:text-3xl">
@@ -68,7 +68,7 @@ export default function Programmi() {
 
             <a
               href="#cta"
-              className="mt-auto inline-flex w-fit items-center gap-2 pt-8 text-base font-semibold text-white underline-offset-8 transition-colors hover:text-accent hover:underline"
+              className="mt-8 flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-base font-semibold text-white transition-colors hover:border-accent hover:text-accent sm:w-fit sm:justify-start sm:rounded-none sm:border-0 sm:px-0 sm:py-0 sm:underline-offset-8 sm:hover:text-accent sm:hover:underline lg:mt-auto lg:pt-8"
             >
               Scopri Customer Generation →
             </a>
@@ -77,7 +77,7 @@ export default function Programmi() {
           {/* CARD B — Revenue Generation */}
           <Reveal
             delay={0.1}
-            className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-8 sm:p-10"
+            className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8 lg:p-10"
           >
             <div id="revenue-generation" className="scroll-mt-24">
               <h3 className="text-2xl font-bold tracking-tight sm:text-3xl">
@@ -98,7 +98,7 @@ export default function Programmi() {
 
             <a
               href="#cta"
-              className="mt-auto inline-flex w-fit items-center gap-2 pt-8 text-base font-semibold text-white underline-offset-8 transition-colors hover:text-accent hover:underline"
+              className="mt-8 flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-base font-semibold text-white transition-colors hover:border-accent hover:text-accent sm:w-fit sm:justify-start sm:rounded-none sm:border-0 sm:px-0 sm:py-0 sm:underline-offset-8 sm:hover:text-accent sm:hover:underline lg:mt-auto lg:pt-8"
             >
               Scopri Revenue Generation →
             </a>

@@ -6,7 +6,7 @@ export default function CtaFinale() {
   return (
     <section
       id="cta"
-      className="border-t border-white/10 py-32 sm:py-48"
+      className="border-t border-white/10 py-24 sm:py-32 lg:py-48"
     >
       <Container className="text-center">
         <Reveal>

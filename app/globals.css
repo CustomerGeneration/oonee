@@ -22,6 +22,8 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* safeguard: nessuno scroll orizzontale accidentale su mobile */
+  overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {

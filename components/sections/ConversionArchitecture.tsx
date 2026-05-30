@@ -38,7 +38,7 @@ export default function ConversionArchitecture() {
   return (
     <section
       id="conversion-architecture"
-      className="border-t border-white/10 py-32 sm:py-40"
+      className="border-t border-white/10 py-20 sm:py-32 lg:py-40"
     >
       <Container>
         <Reveal>
@@ -61,12 +61,12 @@ export default function ConversionArchitecture() {
             <Reveal
               key={pillar.number}
               delay={(i % 2) * 0.1}
-              className="flex h-full flex-col bg-black p-8 sm:p-10"
+              className="flex h-full flex-col bg-black p-6 sm:p-8 lg:p-10"
             >
               <span className="text-sm font-bold tracking-widest text-accent">
                 {pillar.number}
               </span>
-              <h3 className="mt-4 text-xl font-bold uppercase tracking-tight sm:text-2xl">
+              <h3 className="mt-4 text-lg font-bold uppercase tracking-tight sm:text-xl lg:text-2xl">
                 {pillar.title}
               </h3>
 

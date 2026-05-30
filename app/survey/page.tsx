@@ -9,8 +9,8 @@ export const metadata = {
 
 export default function SurveyPage() {
   return (
-    <section className="flex min-h-screen items-center py-32 sm:py-40">
-      <Container>
+    <section className="flex min-h-screen w-full items-center py-28 sm:py-40">
+      <Container className="min-w-0">
         <SurveyForm />
       </Container>
     </section>
