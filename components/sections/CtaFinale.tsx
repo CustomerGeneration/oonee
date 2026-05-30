@@ -26,7 +26,7 @@ export default function CtaFinale() {
         <Reveal delay={0.2}>
           <Link
             href="/survey"
-            className="mt-12 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-semibold text-black transition-colors hover:bg-accent hover:text-white sm:text-lg"
+            className="mt-12 inline-flex min-h-[52px] items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-semibold text-black transition hover:bg-accent hover:text-white active:scale-[0.98] sm:text-lg"
           >
             Inizia l&apos;analisi →
           </Link>

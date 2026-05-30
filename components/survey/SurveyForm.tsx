@@ -38,7 +38,7 @@ function OptionButton({
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className={`w-full rounded-xl border px-5 py-4 text-left text-base transition-colors ${
+      className={`flex min-h-[56px] w-full items-center rounded-xl border px-5 py-4 text-left text-base transition active:scale-[0.99] ${
         selected
           ? "border-accent bg-accent/10 text-white"
           : "border-white/15 text-white/80 hover:border-white/40"
@@ -65,7 +65,7 @@ function Field({
       </span>
       <input
         {...props}
-        className="w-full rounded-xl border border-white/15 bg-white/[0.02] px-4 py-3 text-base text-white placeholder:text-white/30 focus:border-accent focus:outline-none"
+        className="min-h-[48px] w-full rounded-xl border border-white/15 bg-white/[0.02] px-4 py-3 text-base text-white placeholder:text-white/30 focus:border-accent focus:outline-none"
       />
     </label>
   );
@@ -383,7 +383,7 @@ export default function SurveyForm() {
           type="button"
           onClick={next}
           disabled={!stepValid() || submitting}
-          className="rounded-full bg-white px-8 py-3 text-base font-semibold text-black transition-colors hover:bg-accent hover:text-white disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-black"
+          className="min-h-[48px] rounded-full bg-white px-8 py-3 text-base font-semibold text-black transition hover:bg-accent hover:text-white active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-black disabled:active:scale-100"
         >
           {submitting
             ? "Invio…"

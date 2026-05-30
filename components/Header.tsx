@@ -39,7 +39,7 @@ export default function Header() {
         {/* CTA desktop */}
         <Link
           href="/#cta"
-          className="hidden rounded-full bg-white px-5 py-2 text-sm font-semibold text-black transition-colors hover:bg-accent hover:text-white md:inline-flex"
+          className="hidden rounded-full bg-white px-5 py-2 text-sm font-semibold text-black transition hover:bg-accent hover:text-white active:scale-[0.97] md:inline-flex"
         >
           Scopri il potenziale →
         </Link>
@@ -104,7 +104,7 @@ export default function Header() {
           <Link
             href="/#cta"
             onClick={() => setOpen(false)}
-            className="mt-4 flex min-h-[44px] w-full items-center justify-center rounded-full bg-white px-5 text-base font-semibold text-black transition-colors hover:bg-accent hover:text-white"
+            className="mt-4 flex min-h-[48px] w-full items-center justify-center rounded-full bg-white px-5 text-base font-semibold text-black transition active:scale-[0.98]"
           >
             Scopri il potenziale →
           </Link>

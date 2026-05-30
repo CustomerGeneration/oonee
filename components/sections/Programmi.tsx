@@ -68,7 +68,7 @@ export default function Programmi() {
 
             <a
               href="#cta"
-              className="mt-8 flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-base font-semibold text-white transition-colors hover:border-accent hover:text-accent sm:w-fit sm:justify-start sm:rounded-none sm:border-0 sm:px-0 sm:py-0 sm:underline-offset-8 sm:hover:text-accent sm:hover:underline lg:mt-auto lg:pt-8"
+              className="mt-8 flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-base font-semibold text-white transition hover:border-accent hover:text-accent active:scale-[0.98] sm:min-h-0 sm:w-fit sm:justify-start sm:rounded-none sm:border-0 sm:px-0 sm:py-0 sm:underline-offset-8 sm:hover:text-accent sm:hover:underline sm:active:scale-100 lg:mt-auto lg:pt-8"
             >
               Scopri Customer Generation →
             </a>
@@ -98,7 +98,7 @@ export default function Programmi() {
 
             <a
               href="#cta"
-              className="mt-8 flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-base font-semibold text-white transition-colors hover:border-accent hover:text-accent sm:w-fit sm:justify-start sm:rounded-none sm:border-0 sm:px-0 sm:py-0 sm:underline-offset-8 sm:hover:text-accent sm:hover:underline lg:mt-auto lg:pt-8"
+              className="mt-8 flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-base font-semibold text-white transition hover:border-accent hover:text-accent active:scale-[0.98] sm:min-h-0 sm:w-fit sm:justify-start sm:rounded-none sm:border-0 sm:px-0 sm:py-0 sm:underline-offset-8 sm:hover:text-accent sm:hover:underline sm:active:scale-100 lg:mt-auto lg:pt-8"
             >
               Scopri Revenue Generation →
             </a>

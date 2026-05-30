@@ -70,7 +70,7 @@ export default function Press() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex w-fit items-center gap-2 text-base font-semibold text-white underline-offset-8 transition-colors hover:text-accent hover:underline"
+                  className="-my-2 inline-flex min-h-[44px] w-fit items-center gap-2 py-2 text-base font-semibold text-white underline-offset-8 transition-colors hover:text-accent hover:underline md:my-0 md:min-h-0 md:py-0"
                 >
                   Leggi →
                 </a>
