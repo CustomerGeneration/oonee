@@ -20,7 +20,9 @@
       "Bash(W=1440 H=900 FULL=0 PORT=3000 node /tmp/oonee-shot/shot.mjs / heroRealDk)",
       "Bash(git commit -m 'feat: hero mobile con la montagna REALE della scena \\(frame catturato\\) *)",
       "Bash(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000)",
-      "Bash(echo \"dev: $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000\\)\")"
+      "Bash(echo \"dev: $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000\\)\")",
+      "Bash(curl -s -o /dev/null http://localhost:__TRACKED_VAR__/)",
+      "Bash(W=390 H=844 FULL=0 PORT=__TRACKED_VAR__ node /tmp/oonee-shot/shot.mjs / hf390)"
     ]
   }
 }

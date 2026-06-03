@@ -85,22 +85,28 @@ export default function Hero() {
         }}
       />
 
-      {/* Montagna reale ancorata in basso */}
+      {/* Montagna reale: riempie la metà bassa, grande e d'impatto */}
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-0 left-1/2 z-0 w-[135%] max-w-none -translate-x-1/2"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[58svh]"
       >
         <Image
           src="/hero-mountain.jpg"
           alt=""
-          width={1200}
-          height={377}
+          fill
           priority
-          className="w-full select-none"
+          sizes="100vw"
+          className="select-none object-cover object-top"
         />
-        {/* sfuma il bordo alto della montagna nel nero */}
-        <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black to-transparent" />
+        {/* sfuma il bordo alto della montagna nel nero (chiude il vuoto col testo) */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black to-transparent" />
       </div>
+
+      {/* velatura in basso per leggibilità di "scopri" */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-t from-black/70 to-transparent"
+      />
 
       {/* Wordmark + payoff */}
       <div className="relative z-10 flex flex-col items-center">
