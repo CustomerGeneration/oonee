@@ -3,7 +3,10 @@ import Reveal from "@/components/Reveal";
 
 export default function Manifesto() {
   return (
-    <section id="manifesto" className="py-20 sm:py-32 lg:py-40">
+    <section
+      id="manifesto"
+      className="bg-gradient-to-b from-black to-[#050810] py-20 sm:py-32 lg:py-40"
+    >
       <Container>
         <Reveal>
           <h1 className="max-w-4xl text-[2.75rem] font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">

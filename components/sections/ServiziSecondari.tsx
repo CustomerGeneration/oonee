@@ -20,7 +20,7 @@ const SERVICES: Service[] = [
 
 export default function ServiziSecondari() {
   return (
-    <section className="border-t border-white/10 py-20 sm:py-32 lg:py-40">
+    <section className="border-t border-white/5 bg-gradient-to-b from-[#0A1525] to-[#050810] py-20 sm:py-32 lg:py-40">
       <Container>
         <Reveal>
           <h2 className="text-3xl font-bold leading-tight tracking-tight sm:text-5xl">

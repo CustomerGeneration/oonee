@@ -45,7 +45,7 @@ export default function ConversionArchitecture() {
   return (
     <section
       id="conversion-architecture"
-      className="border-t border-white/10 py-20 sm:py-32 lg:py-40"
+      className="border-t border-white/5 bg-[#050810] py-20 sm:py-32 lg:py-40"
     >
       <Container>
         <Reveal>
