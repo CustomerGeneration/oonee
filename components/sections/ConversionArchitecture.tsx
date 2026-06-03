@@ -1,9 +1,12 @@
+import { Building2, Fingerprint, GitBranch, User } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import Container from "@/components/Container";
 import Reveal from "@/components/Reveal";
 
 type Pillar = {
   number: string;
   title: string;
+  icon: LucideIcon;
   body?: string;
   quote?: string;
   attribution?: string;
@@ -13,11 +16,13 @@ const PILLARS: Pillar[] = [
   {
     number: "01",
     title: "Parte dal business, non dal canale",
+    icon: Building2,
     body: "Prima di scegliere come comunicare, capiamo cosa vendi, a chi, e perché dovrebbero comprare da te.",
   },
   {
     number: "02",
     title: "È un funnel adattivo",
+    icon: GitBranch,
     quote:
       "Il funnel adattivo costruisce un percorso su misura per ogni singolo utente, step dopo step, abbandonando l'approccio generico.",
     attribution: "— Angelo Maiolini, Economy Magazine",
@@ -25,11 +30,13 @@ const PILLARS: Pillar[] = [
   {
     number: "03",
     title: "È iper-personalizzata",
+    icon: User,
     body: "Non comunichiamo a un pubblico. Comunichiamo a una persona. Concentrandoci non sul prodotto in sé, ma su come quel prodotto risolva concretamente il suo problema specifico.",
   },
   {
     number: "04",
     title: "Non è copiabile",
+    icon: Fingerprint,
     body: "Ogni Conversion Architecture è unica perché ogni business è unico. Per questo funziona. Per questo non si replica.",
   },
 ];
@@ -63,7 +70,8 @@ export default function ConversionArchitecture() {
               delay={(i % 2) * 0.1}
               className="flex h-full flex-col bg-black p-6 sm:p-8 lg:p-10"
             >
-              <span className="text-sm font-bold tracking-widest text-accent">
+              <pillar.icon size={32} className="text-accent" aria-hidden />
+              <span className="mt-5 text-sm font-bold tracking-widest text-accent">
                 {pillar.number}
               </span>
               <h3 className="mt-4 text-lg font-bold uppercase tracking-tight sm:text-xl lg:text-2xl">
