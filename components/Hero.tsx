@@ -3,13 +3,14 @@
 import { useState } from "react";
 
 /**
- * Scena Spline pubblicata da Nico (viewer standalone con dati 3D inline).
- * La scena NON è esportata come ".splinecode" pubblico, quindi @splinetool/react-spline
- * non può caricarla. L'embed corretto e affidabile è l'iframe sull'URL del viewer.
+ * HERO — un'unica scena Spline.
+ * - Desktop (md+): full-bleed 100svh, interattiva. INVARIATA.
+ * - Mobile (<md): la STESSA scena, ma in un contenitore con proporzione tale
+ *   che l'intera composizione (wordmark "oonee" + payoff + montagna) entri
+ *   senza tagli ai lati. L'altezza dell'hero = quella della scena scalata →
+ *   niente fasce nere. Niente testo HTML, niente overlay: è la scena reale.
  *
- * NOTA: nel piano Spline free il viewer mostra il badge "Built with Spline" in basso a
- * destra. Si rimuove solo con piano a pagamento oppure esportando la scena come codice
- * (a quel punto si potrà passare a react-spline e nascondere il logo).
+ * La configurazione della scena Spline NON viene toccata.
  */
 const SCENE_VIEWER_URL =
   "https://my.spline.design/nexusmountain-EchmUygwI5WJIYPdhMw2fWDL/";
@@ -18,26 +19,27 @@ export default function Hero() {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <section
-      id="hero"
-      className="relative h-[100svh] w-full overflow-hidden bg-black"
-    >
-      {/* Placeholder mentre la scena 3D carica */}
-      {!loaded && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <span className="animate-pulse text-sm font-bold uppercase tracking-[0.4em] text-white/40">
-            oonee
-          </span>
-        </div>
-      )}
+    <section id="hero" className="relative w-full overflow-hidden bg-black">
+      {/* Mobile: proporzione che mostra l'intera composizione (oonee intero).
+          Desktop: full-bleed 100svh. */}
+      <div className="relative aspect-[8/9] w-full md:aspect-auto md:h-[100svh]">
+        {/* Placeholder mentre la scena 3D carica */}
+        {!loaded && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center">
+            <span className="animate-pulse text-sm font-bold uppercase tracking-[0.4em] text-white/40">
+              oonee
+            </span>
+          </div>
+        )}
 
-      <iframe
-        src={SCENE_VIEWER_URL}
-        title="Oonee — Marketing Agency specializzata in Conversion Architecture"
-        onLoad={() => setLoaded(true)}
-        allow="autoplay; fullscreen; xr-spatial-tracking"
-        className="absolute inset-0 h-full w-full border-0"
-      />
+        <iframe
+          src={SCENE_VIEWER_URL}
+          title="Oonee — Marketing Agency specializzata in Conversion Architecture"
+          onLoad={() => setLoaded(true)}
+          allow="autoplay; fullscreen; xr-spatial-tracking"
+          className="absolute inset-0 h-full w-full border-0"
+        />
+      </div>
 
       {/* Indicatore scroll */}
       <a
