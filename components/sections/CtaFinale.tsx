@@ -6,11 +6,11 @@ export default function CtaFinale() {
   return (
     <section
       id="cta"
-      className="border-t border-white/5 bg-gradient-to-b from-[#050810] to-black py-24 sm:py-32 lg:py-48"
+      className="border-t border-white/5 bg-gradient-to-b from-[#050810] to-black py-16 sm:py-32 lg:py-48"
     >
       <Container className="text-center">
         <Reveal>
-          <h2 className="mx-auto max-w-4xl text-3xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+          <h2 className="mx-auto max-w-4xl text-[clamp(1.9rem,6vw,3.75rem)] font-bold leading-[1.1] tracking-tight">
             Scopri il potenziale del tuo business con la Conversion
             Architecture.
           </h2>

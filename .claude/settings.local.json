@@ -10,7 +10,9 @@
       "Bash(git commit -m 'feat: gradient background scrolling effect *)",
       "Bash(pkill -f \"next dev\")",
       "Bash(W=1440 H=820 TAG=d PORT=3000 node /tmp/oonee-shot/sections.mjs '#hero')",
-      "Bash(open http://localhost:3000)"
+      "Bash(open http://localhost:3000)",
+      "Bash(W=390 H=844 TAG=m390 PORT=3000 node /tmp/oonee-shot/sections.mjs '#manifesto')",
+      "Bash(awk '{print $5}')"
     ]
   }
 }

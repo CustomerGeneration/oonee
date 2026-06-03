@@ -20,7 +20,7 @@ const SERVICES: Service[] = [
 
 export default function ServiziSecondari() {
   return (
-    <section className="border-t border-white/5 bg-gradient-to-b from-[#0A1525] to-[#050810] py-20 sm:py-32 lg:py-40">
+    <section className="border-t border-white/5 bg-gradient-to-b from-[#0A1525] to-[#050810] py-16 sm:py-32 lg:py-40">
       <Container>
         <Reveal>
           <h2 className="text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
@@ -28,7 +28,7 @@ export default function ServiziSecondari() {
           </h2>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-16 md:grid-cols-2">
           {SERVICES.map((service, i) => (
             <Reveal
               key={service.name}

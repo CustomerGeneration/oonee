@@ -3,7 +3,7 @@ import Reveal from "@/components/Reveal";
 
 export default function Founder() {
   return (
-    <section id="founder" className="border-t border-white/5 bg-[#050810] py-20 sm:py-32 lg:py-40">
+    <section id="founder" className="border-t border-white/5 bg-[#050810] py-16 sm:py-32 lg:py-40">
       <Container>
         <Reveal>
           <h2 className="text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
@@ -11,7 +11,7 @@ export default function Founder() {
           </h2>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-[300px_1fr] md:gap-16">
+        <div className="mt-10 grid grid-cols-1 gap-10 sm:mt-16 md:grid-cols-[300px_1fr] md:gap-16">
           {/* Avatar founder — TODO: sostituire con foto reale */}
           <Reveal className="flex justify-center md:justify-start">
             <div className="flex h-[200px] w-[200px] items-center justify-center rounded-full border border-accent/60 bg-gradient-to-br from-[#0099CC] to-[#003366] shadow-[0_0_70px_-15px_rgba(0,153,204,0.7)] md:h-[300px] md:w-[300px]">

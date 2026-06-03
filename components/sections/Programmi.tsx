@@ -50,7 +50,7 @@ export default function Programmi() {
   return (
     <section
       id="programmi"
-      className="border-t border-white/5 bg-gradient-to-b from-[#050810] to-[#0A1525] py-20 sm:py-32 lg:py-40"
+      className="border-t border-white/5 bg-gradient-to-b from-[#050810] to-[#0A1525] py-16 sm:py-32 lg:py-40"
     >
       <Container>
         <Reveal>
@@ -66,7 +66,7 @@ export default function Programmi() {
           </p>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-16 lg:grid-cols-2">
           {/* CARD A — Customer Generation */}
           <Reveal className={cardClass}>
             <Target size={40} className="text-accent" aria-hidden />

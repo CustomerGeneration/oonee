@@ -45,7 +45,7 @@ export default function ConversionArchitecture() {
   return (
     <section
       id="conversion-architecture"
-      className="border-t border-white/5 bg-[#050810] py-20 sm:py-32 lg:py-40"
+      className="border-t border-white/5 bg-[#050810] py-16 sm:py-32 lg:py-40"
     >
       <Container>
         <Reveal>
@@ -63,7 +63,7 @@ export default function ConversionArchitecture() {
           </p>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 md:grid-cols-2">
+        <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:mt-16 md:grid-cols-2">
           {PILLARS.map((pillar, i) => (
             <Reveal
               key={pillar.number}

@@ -5,11 +5,11 @@ export default function Manifesto() {
   return (
     <section
       id="manifesto"
-      className="bg-gradient-to-b from-black to-[#050810] py-20 sm:py-32 lg:py-40"
+      className="bg-gradient-to-b from-black to-[#050810] py-16 sm:py-32 lg:py-40"
     >
       <Container>
         <Reveal>
-          <h1 className="max-w-4xl text-[2.75rem] font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="max-w-4xl text-[clamp(2.4rem,9vw,4.5rem)] font-bold leading-[1.05] tracking-tight">
             Non vendiamo marketing.
             <br />
             <span className="text-accent">Generiamo clienti.</span>
