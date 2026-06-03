@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"tsc exit: $?\")",
+      "Bash(git add *)",
+      "Bash(git commit -m 'feat: trust section migliorata *)"
     ]
   }
 }

@@ -49,33 +49,31 @@ export default function Press() {
           </p>
         </Reveal>
 
-        <div className="mt-16 divide-y divide-white/10 border-y border-white/10">
+        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
           {PRESS.map((item, i) => (
             <Reveal
               key={item.outlet}
-              delay={(i % 2) * 0.05}
-              className="flex flex-col gap-4 py-8 md:flex-row md:items-center md:justify-between md:gap-8"
+              delay={(i % 2) * 0.1}
+              className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-8 transition duration-300 hover:border-accent/50 hover:shadow-[0_0_50px_-20px_rgba(0,153,204,0.55)] sm:p-10"
             >
-              <div className="md:flex md:flex-1 md:items-baseline md:gap-8">
-                <h3 className="text-xl font-bold tracking-tight sm:text-2xl md:w-64 md:shrink-0">
-                  {item.outlet}
-                </h3>
-                <p className="mt-2 text-base text-white/60 md:mt-0">
-                  {item.title}
-                </p>
-              </div>
+              <h3 className="text-2xl font-bold tracking-tight">
+                {item.outlet}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/50">
+                {item.title}
+              </p>
 
               {item.href ? (
                 <a
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="-my-2 inline-flex min-h-[44px] w-fit items-center gap-2 py-2 text-base font-semibold text-white underline-offset-8 transition-colors hover:text-accent hover:underline md:my-0 md:min-h-0 md:py-0"
+                  className="mt-6 inline-flex w-fit items-center gap-2 text-base font-semibold text-accent underline-offset-8 transition-colors hover:underline"
                 >
-                  Leggi →
+                  Leggi articolo →
                 </a>
               ) : (
-                <span className="inline-flex w-fit items-center gap-2 text-base text-white/30">
+                <span className="mt-6 inline-flex w-fit items-center gap-2 text-base text-white/30">
                   Disponibile a breve
                 </span>
               )}
