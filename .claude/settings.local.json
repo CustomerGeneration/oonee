@@ -13,7 +13,14 @@
       "Bash(open http://localhost:3000)",
       "Bash(W=390 H=844 TAG=m390 PORT=3000 node /tmp/oonee-shot/sections.mjs '#manifesto')",
       "Bash(awk '{print $5}')",
-      "Bash(git commit -m 'fix: hero unica = scena desktop, su mobile scalata \\(no crop, no duplicati\\) *)"
+      "Bash(git commit -m 'fix: hero unica = scena desktop, su mobile scalata \\(no crop, no duplicati\\) *)",
+      "Bash(sips -s format jpeg -s formatOptions 72 public/hero-mountain.png --out public/hero-mountain.jpg)",
+      "Bash(sips -s format webp -s formatOptions 75 public/hero-mountain.png --out /tmp/hero-mountain.webp)",
+      "Bash(W=360 H=780 FULL=0 PORT=3000 node /tmp/oonee-shot/shot.mjs / heroReal360)",
+      "Bash(W=1440 H=900 FULL=0 PORT=3000 node /tmp/oonee-shot/shot.mjs / heroRealDk)",
+      "Bash(git commit -m 'feat: hero mobile con la montagna REALE della scena \\(frame catturato\\) *)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000)",
+      "Bash(echo \"dev: $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000\\)\")"
     ]
   }
 }

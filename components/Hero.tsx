@@ -1,16 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 /**
  * HERO.
  * - Desktop (>=768px): scena Spline 3D full-bleed e interattiva. INVARIATA.
- * - Mobile (<768px): hero pulita in HTML/SVG (nessuna scena Spline → nessun
- *   testo/ghost duplicato). Layout verticale ben distribuito che riempie lo
- *   schermo: wordmark "oonee" grande → payoff leggibile → iceberg grande →
- *   "scopri". Tutto in HTML, quindi sempre intero, leggibile e senza tagli.
+ * - Mobile (<768px): testo in HTML (sempre intero/leggibile) + la MONTAGNA
+ *   REALE della scena (frame catturato dalla scena Spline desktop, senza il
+ *   testo baked-in) come immagine ancorata in basso. Niente scena Spline
+ *   live su mobile → niente testo croppato, niente ghost, niente scroll-trap.
  *
- * La configurazione della scena Spline NON viene toccata.
+ * La configurazione della scena Spline NON viene toccata. L'immagine
+ * public/hero-mountain.jpg è un frame reale della scena (non una grafica
+ * inventata).
  */
 const SCENE_VIEWER_URL =
   "https://my.spline.design/nexusmountain-EchmUygwI5WJIYPdhMw2fWDL/";
@@ -25,54 +28,6 @@ function ScrollCue({ className = "" }: { className?: string }) {
       <span className="text-xs uppercase tracking-[0.3em]">scopri</span>
       <span className="animate-bounce text-lg leading-none">↓</span>
     </a>
-  );
-}
-
-function Iceberg() {
-  return (
-    <svg
-      viewBox="0 0 240 240"
-      className="h-auto w-[72%] max-w-[300px]"
-      aria-hidden
-    >
-      <defs>
-        <linearGradient id="iceTop" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#ffffff" />
-          <stop offset="1" stopColor="#a5e4ff" />
-        </linearGradient>
-        <linearGradient id="iceBottom" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#0099cc" />
-          <stop offset="1" stopColor="#003366" />
-        </linearGradient>
-      </defs>
-
-      {/* punta sopra la linea d'acqua */}
-      <polygon points="120,28 150,116 90,116" fill="url(#iceTop)" />
-      <polygon points="120,28 150,116 124,116" fill="#cdeeff" fillOpacity="0.7" />
-
-      {/* massa sommersa (la parte nascosta dell'iceberg) */}
-      <polygon
-        points="90,124 150,124 196,214 44,214"
-        fill="url(#iceBottom)"
-        fillOpacity="0.85"
-      />
-      <polygon
-        points="120,124 150,124 196,214 120,214"
-        fill="#002b52"
-        fillOpacity="0.5"
-      />
-
-      {/* linea d'acqua */}
-      <line
-        x1="20"
-        y1="120"
-        x2="220"
-        y2="120"
-        stroke="#0099cc"
-        strokeOpacity="0.4"
-        strokeWidth="1.5"
-      />
-    </svg>
   );
 }
 
@@ -114,21 +69,38 @@ export default function Hero() {
     );
   }
 
-  // MOBILE (e SSR di default) — hero HTML/SVG pulita
+  // MOBILE (e SSR di default) — testo HTML + montagna reale
   return (
     <section
       id="hero"
-      className="relative flex h-[100svh] w-full flex-col items-center justify-between overflow-hidden bg-black px-6 pb-10 pt-24 text-center"
+      className="relative flex h-[100svh] w-full flex-col items-center overflow-hidden bg-black px-6 pt-24 text-center"
     >
       {/* glow azzurro discreto */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[120vw] w-[120vw] -translate-x-1/2 -translate-y-1/2"
+        className="pointer-events-none absolute left-1/2 top-1/3 h-[110vw] w-[110vw] -translate-x-1/2 -translate-y-1/2"
         style={{
           background:
-            "radial-gradient(circle, rgba(0,153,204,0.18), transparent 62%)",
+            "radial-gradient(circle, rgba(0,153,204,0.16), transparent 62%)",
         }}
       />
+
+      {/* Montagna reale ancorata in basso */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 left-1/2 z-0 w-[135%] max-w-none -translate-x-1/2"
+      >
+        <Image
+          src="/hero-mountain.jpg"
+          alt=""
+          width={1200}
+          height={377}
+          priority
+          className="w-full select-none"
+        />
+        {/* sfuma il bordo alto della montagna nel nero */}
+        <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black to-transparent" />
+      </div>
 
       {/* Wordmark + payoff */}
       <div className="relative z-10 flex flex-col items-center">
@@ -146,13 +118,8 @@ export default function Hero() {
         </p>
       </div>
 
-      {/* Iceberg protagonista */}
-      <div className="relative z-10 flex flex-1 items-center justify-center py-6">
-        <Iceberg />
-      </div>
-
       {/* Scopri */}
-      <ScrollCue className="relative z-10" />
+      <ScrollCue className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2" />
     </section>
   );
 }
