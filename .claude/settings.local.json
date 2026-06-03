@@ -5,7 +5,8 @@
       "Bash(npx tsc *)",
       "Bash(echo \"tsc exit: $?\")",
       "Bash(git add *)",
-      "Bash(git commit -m 'feat: trust section migliorata *)"
+      "Bash(git commit -m 'feat: trust section migliorata *)",
+      "Bash(git commit -m 'feat: founder section migliorata con avatar placeholder elegante *)"
     ]
   }
 }
