@@ -12,7 +12,8 @@
       "Bash(W=1440 H=820 TAG=d PORT=3000 node /tmp/oonee-shot/sections.mjs '#hero')",
       "Bash(open http://localhost:3000)",
       "Bash(W=390 H=844 TAG=m390 PORT=3000 node /tmp/oonee-shot/sections.mjs '#manifesto')",
-      "Bash(awk '{print $5}')"
+      "Bash(awk '{print $5}')",
+      "Bash(git commit -m 'fix: hero unica = scena desktop, su mobile scalata \\(no crop, no duplicati\\) *)"
     ]
   }
 }
