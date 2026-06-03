@@ -1,14 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import NeuralBackground from "./NeuralBackground";
 
 /**
  * HERO.
  * - Desktop (>=768px): scena Spline 3D full-bleed e interattiva. INVARIATA.
- * - Mobile (<768px): hero pulita ed elegante — solo nero brand + glow azzurro
- *   morbido + testo (wordmark "oonee" + payoff + "scopri"), centrato e
- *   bilanciato. NESSUNA scena 3D/Spline (non viene nemmeno caricata, via render
- *   condizionale con matchMedia) → leggera, veloce, sempre intera e leggibile.
+ * - Mobile (<768px): hero pulita ed elegante — animazione neurale (canvas 2D,
+ *   no 3D pesante) full-bleed dietro al testo, su nero brand, con testo
+ *   (wordmark "oonee" + payoff + UN solo "scopri") centrato verticalmente.
+ *   NESSUNA scena 3D/Spline (non viene nemmeno caricata, via render condizionale
+ *   con matchMedia) → leggera e veloce.
  *
  * La configurazione della scena Spline NON viene toccata.
  */
@@ -66,19 +68,22 @@ export default function Hero() {
     );
   }
 
-  // MOBILE (e SSR di default) — hero pulita: nero + glow + testo centrato
+  // MOBILE (e SSR di default) — animazione neurale + testo centrato
   return (
     <section
       id="hero"
-      className="relative flex h-[100svh] w-full flex-col items-center justify-center overflow-hidden bg-black px-6 text-center"
+      className="relative flex h-[100svh] min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden bg-black px-6 text-center"
     >
-      {/* glow azzurro morbido */}
+      {/* Animazione neurale full-bleed dietro al testo */}
+      <NeuralBackground className="absolute inset-0 z-0 h-full w-full" />
+
+      {/* Velatura per contrasto (più scura al centro, dietro al testo) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[135vw] w-[135vw] -translate-x-1/2 -translate-y-1/2"
+        className="pointer-events-none absolute inset-0 z-[1]"
         style={{
           background:
-            "radial-gradient(circle, rgba(0,153,204,0.20), transparent 60%)",
+            "radial-gradient(ellipse at center, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.25) 70%, rgba(0,0,0,0.55) 100%)",
         }}
       />
 
