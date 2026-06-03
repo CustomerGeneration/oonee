@@ -7,7 +7,10 @@
       "Bash(git add *)",
       "Bash(git commit -m 'feat: trust section migliorata *)",
       "Bash(git commit -m 'feat: founder section migliorata con avatar placeholder elegante *)",
-      "Bash(git commit -m 'feat: gradient background scrolling effect *)"
+      "Bash(git commit -m 'feat: gradient background scrolling effect *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(W=1440 H=820 TAG=d PORT=3000 node /tmp/oonee-shot/sections.mjs '#hero')",
+      "Bash(open http://localhost:3000)"
     ]
   }
 }
