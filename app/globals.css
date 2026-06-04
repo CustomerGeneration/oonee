@@ -35,6 +35,49 @@ body {
   }
 }
 
+/* Marquee orizzontale (trust/menzioni stampa) */
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-mask {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 45s linear infinite;
+}
+.marquee-mask:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-mask {
+    overflow-x: auto;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
+
 /* Tipografia per le pagine legali (Privacy, Cookie, Termini) */
 .legal-content {
   color: rgba(255, 255, 255, 0.7);

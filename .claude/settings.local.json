@@ -34,7 +34,13 @@
       "Bash(npm install *)",
       "Bash(node /tmp/oonee-shot/assets.mjs)",
       "Bash(awk '{print $9, $5}')",
-      "Bash(node /tmp/oonee-shot/whitelogos.mjs)"
+      "Bash(node /tmp/oonee-shot/whitelogos.mjs)",
+      "Bash(grep -ivE \"\\\\.svg$\")",
+      "Bash(echo \"home $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000\\)\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/icon.png)",
+      "Bash(echo \"icon.png: $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/icon.png\\)\")",
+      "Bash(sips --resampleWidth 1400 /tmp/v4-press.png --out /tmp/v4-press-s.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight /tmp/v4-press-s.png)"
     ]
   }
 }

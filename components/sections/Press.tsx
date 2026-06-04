@@ -4,40 +4,62 @@ import Reveal from "@/components/Reveal";
 type PressItem = {
   outlet: string;
   title: string;
-  href: string | null; // null = link non ancora disponibile
-  logo?: string; // logo bianco su trasparente (se disponibile)
+  href: string;
 };
 
 const PRESS: PressItem[] = [
   {
     outlet: "Fortune Italia",
-    logo: "/fortune-white.png",
     title:
       "La Calabria diventa hub tecnologico: l'AI rivoluziona il marketing digitale",
     href: "https://www.fortuneita.com/2025/12/21/la-calabria-diventa-hub-tecnologico-lai-rivoluziona-il-marketing-digitale-dalle-coste-del-sud-il-commento-di-angelo-nico-maiolini/",
   },
   {
     outlet: "Economy Magazine",
-    logo: "/economy-white.png",
     title:
       "Dai troppi bit all'iper-personalizzazione, ecco il nuovo marketing",
     href: "https://www.economymagazine.it/maiolini-dai-troppi-bit-alliper-personalizzazione-ecco-il-nuovo-marketing/",
   },
   {
-    outlet: "Sky Italia",
-    title: "Intervista TV",
-    href: null,
+    outlet: "Cronache di Milano",
+    title: "La lead generation tradizionale è in crisi",
+    href: "https://cronachedimilano.com/la-lead-generation-tradizionale-e-in-crisi/",
   },
   {
-    outlet: "Cronache di Milano",
-    title: "Articolo dedicato",
-    href: null,
+    outlet: "Primo Piano 24",
+    title: "La lead generation tradizionale è in crisi",
+    href: "https://primopiano24.it/la-lead-generation-tradizionale-e-in-crisi/",
   },
 ];
 
-export default function Press() {
+function PressCard({ item }: { item: PressItem }) {
   return (
-    <section id="press" className="border-t border-white/5 bg-[#0A1525] py-16 sm:py-32 lg:py-40">
+    <article className="mr-6 flex h-full w-[280px] shrink-0 flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-7 sm:w-[340px] sm:p-8">
+      <h3 className="text-xl font-bold tracking-tight">{item.outlet}</h3>
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-white/50">
+        {item.title}
+      </p>
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-6 inline-flex w-fit items-center gap-2 text-sm font-semibold text-accent underline-offset-8 transition-colors hover:underline"
+      >
+        Leggi l&apos;articolo →
+      </a>
+    </article>
+  );
+}
+
+export default function Press() {
+  // duplico la lista per il loop continuo (translateX -50%)
+  const loop = [...PRESS, ...PRESS];
+
+  return (
+    <section
+      id="press"
+      className="overflow-hidden border-t border-white/5 bg-[#0A1525] py-16 sm:py-32 lg:py-40"
+    >
       <Container>
         <Reveal>
           <h2 className="text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
@@ -51,50 +73,22 @@ export default function Press() {
             Conversion Architecture è stata raccontata da:
           </p>
         </Reveal>
-
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-16 md:grid-cols-2">
-          {PRESS.map((item, i) => (
-            <Reveal
-              key={item.outlet}
-              delay={(i % 2) * 0.1}
-              className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-8 transition duration-300 hover:border-accent/50 hover:shadow-[0_0_50px_-20px_rgba(0,153,204,0.55)] sm:p-10"
-            >
-              <div className="flex h-10 items-center">
-                {item.logo ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={item.logo}
-                    alt={item.outlet}
-                    className="h-9 w-auto max-w-[200px] object-contain object-left"
-                  />
-                ) : (
-                  <h3 className="text-2xl font-bold tracking-tight">
-                    {item.outlet}
-                  </h3>
-                )}
-              </div>
-              <p className="mt-3 text-sm leading-relaxed text-white/50">
-                {item.title}
-              </p>
-
-              {item.href ? (
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex w-fit items-center gap-2 text-base font-semibold text-accent underline-offset-8 transition-colors hover:underline"
-                >
-                  Leggi articolo →
-                </a>
-              ) : (
-                <span className="mt-6 inline-flex w-fit items-center gap-2 text-base text-white/30">
-                  Disponibile a breve
-                </span>
-              )}
-            </Reveal>
-          ))}
-        </div>
       </Container>
+
+      {/* Carosello a scorrimento continuo (pausa al passaggio del mouse) */}
+      <div className="marquee-mask group mt-10 sm:mt-16">
+        <ul className="marquee-track">
+          {loop.map((item, i) => (
+            <li
+              key={`${item.outlet}-${i}`}
+              className="flex"
+              aria-hidden={i >= PRESS.length}
+            >
+              <PressCard item={item} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

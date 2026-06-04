@@ -12,16 +12,22 @@ export default function Founder() {
           </h2>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-1 gap-10 sm:mt-16 md:grid-cols-[300px_1fr] md:gap-16">
-          {/* Foto founder */}
+        <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-16 md:grid-cols-[340px_1fr] md:gap-16">
+          {/* Foto founder: B/N che sfuma nel fondo nero */}
           <Reveal className="flex justify-center md:justify-start">
-            <div className="relative h-[200px] w-[200px] overflow-hidden rounded-full border border-accent/60 shadow-[0_0_70px_-15px_rgba(0,153,204,0.7)] md:h-[300px] md:w-[300px]">
+            <div className="relative aspect-square w-[260px] sm:w-[300px] md:w-[340px]">
               <Image
-                src="/founder.jpg"
+                src="/founder-bw.jpg"
                 alt="Angelo Nico Maiolini"
                 fill
-                sizes="(min-width: 768px) 300px, 200px"
-                className="object-cover object-center"
+                sizes="(min-width: 768px) 340px, 280px"
+                className="object-cover"
+                style={{
+                  maskImage:
+                    "radial-gradient(ellipse at center, #000 42%, transparent 76%)",
+                  WebkitMaskImage:
+                    "radial-gradient(ellipse at center, #000 42%, transparent 76%)",
+                }}
               />
             </div>
           </Reveal>
