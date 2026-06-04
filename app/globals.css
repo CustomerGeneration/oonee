@@ -78,6 +78,99 @@ body {
   }
 }
 
+/* Tipografia per gli articoli del blog */
+.blog-content {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.075rem;
+  line-height: 1.8;
+}
+.blog-content > * + * {
+  margin-top: 1.4rem;
+}
+.blog-content h2 {
+  color: #fff;
+  font-size: clamp(1.5rem, 4vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-top: 3rem;
+}
+.blog-content h3 {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+.blog-content p {
+  color: rgba(255, 255, 255, 0.78);
+}
+.blog-content a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.blog-content strong {
+  color: #fff;
+  font-weight: 600;
+}
+.blog-content em {
+  color: rgba(255, 255, 255, 0.9);
+}
+.blog-content ul,
+.blog-content ol {
+  padding-left: 1.4rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+.blog-content ul {
+  list-style: disc;
+}
+.blog-content ol {
+  list-style: decimal;
+}
+.blog-content li {
+  margin-top: 0.5rem;
+}
+.blog-content li::marker {
+  color: var(--color-accent);
+}
+.blog-content blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1.25rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.92);
+}
+.blog-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #fff;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.blog-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin-top: 1.5rem;
+}
+.blog-content th,
+.blog-content td {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+}
+.blog-content th {
+  color: #fff;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.04);
+}
+.blog-content hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 2.5rem 0;
+}
+
 /* Tipografia per le pagine legali (Privacy, Cookie, Termini) */
 .legal-content {
   color: rgba(255, 255, 255, 0.7);

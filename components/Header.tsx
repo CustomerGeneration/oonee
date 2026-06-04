@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { label: "Conversion Architecture", href: "/#conversion-architecture" },
   { label: "Customer Generation", href: "/#customer-generation" },
   { label: "Revenue Generation", href: "/#revenue-generation" },
+  { label: "blog", href: "/blog" },
 ];
 
 export default function Header() {
