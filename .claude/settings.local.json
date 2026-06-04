@@ -24,7 +24,12 @@
       "Bash(curl -s -o /dev/null http://localhost:__TRACKED_VAR__/)",
       "Bash(W=390 H=844 FULL=0 PORT=__TRACKED_VAR__ node /tmp/oonee-shot/shot.mjs / hf390)",
       "Bash(W=390 H=844 FULL=0 PORT=__TRACKED_VAR__ node /tmp/oonee-shot/shot.mjs / hclean390)",
-      "Bash(git commit -m 'feat: hero mobile - animazione neurale + testo centrato \\(un solo scopri\\) *)"
+      "Bash(git commit -m 'feat: hero mobile - animazione neurale + testo centrato \\(un solo scopri\\) *)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/privacy-policy)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/cookie-policy)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/termini-e-condizioni)",
+      "Bash(echo \"home $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000\\) | privacy $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/privacy-policy\\) | cookie $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/cookie-policy\\) | termini $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/termini-e-condizioni\\)\")",
+      "Bash(curl -s http://localhost:3000)"
     ]
   }
 }
