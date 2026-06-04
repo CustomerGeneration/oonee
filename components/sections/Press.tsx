@@ -3,6 +3,7 @@ import Reveal from "@/components/Reveal";
 
 type PressItem = {
   outlet: string;
+  logo: string;
   title: string;
   href: string;
 };
@@ -10,33 +11,39 @@ type PressItem = {
 const PRESS: PressItem[] = [
   {
     outlet: "Fortune Italia",
+    logo: "/fortune-press.png",
     title:
       "La Calabria diventa hub tecnologico: l'AI rivoluziona il marketing digitale",
     href: "https://www.fortuneita.com/2025/12/21/la-calabria-diventa-hub-tecnologico-lai-rivoluziona-il-marketing-digitale-dalle-coste-del-sud-il-commento-di-angelo-nico-maiolini/",
   },
   {
     outlet: "Economy Magazine",
+    logo: "/economy-press.png",
     title:
       "Dai troppi bit all'iper-personalizzazione, ecco il nuovo marketing",
     href: "https://www.economymagazine.it/maiolini-dai-troppi-bit-alliper-personalizzazione-ecco-il-nuovo-marketing/",
   },
   {
     outlet: "Cronache di Milano",
+    logo: "/cronache-press.png",
     title: "La lead generation tradizionale è in crisi",
     href: "https://cronachedimilano.com/la-lead-generation-tradizionale-e-in-crisi/",
-  },
-  {
-    outlet: "Primo Piano 24",
-    title: "La lead generation tradizionale è in crisi",
-    href: "https://primopiano24.it/la-lead-generation-tradizionale-e-in-crisi/",
   },
 ];
 
 function PressCard({ item }: { item: PressItem }) {
   return (
-    <article className="mr-6 flex h-full w-[280px] shrink-0 flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-7 sm:w-[340px] sm:p-8">
-      <h3 className="text-xl font-bold tracking-tight">{item.outlet}</h3>
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-white/50">
+    <article className="mr-6 flex h-full w-[280px] shrink-0 flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:w-[330px] sm:p-7">
+      {/* chip bianco uniforme col logo centrato */}
+      <div className="flex h-24 items-center justify-center rounded-xl bg-white px-5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={item.logo}
+          alt={item.outlet}
+          className="max-h-16 max-w-full object-contain"
+        />
+      </div>
+      <p className="mt-5 flex-1 text-sm leading-relaxed text-white/55">
         {item.title}
       </p>
       <a
@@ -52,7 +59,7 @@ function PressCard({ item }: { item: PressItem }) {
 }
 
 export default function Press() {
-  // duplico la lista per il loop continuo (translateX -50%)
+  // duplico per il loop continuo (translateX -50%)
   const loop = [...PRESS, ...PRESS];
 
   return (
@@ -76,7 +83,7 @@ export default function Press() {
       </Container>
 
       {/* Carosello a scorrimento continuo (pausa al passaggio del mouse) */}
-      <div className="marquee-mask group mt-10 sm:mt-16">
+      <div className="marquee-mask mt-10 sm:mt-16">
         <ul className="marquee-track">
           {loop.map((item, i) => (
             <li

@@ -3,6 +3,7 @@ import Manifesto from "@/components/sections/Manifesto";
 import ConversionArchitecture from "@/components/sections/ConversionArchitecture";
 import Programmi from "@/components/sections/Programmi";
 import Press from "@/components/sections/Press";
+import Studioos from "@/components/sections/Studioos";
 import ServiziSecondari from "@/components/sections/ServiziSecondari";
 import Founder from "@/components/sections/Founder";
 import CtaFinale from "@/components/sections/CtaFinale";
@@ -15,6 +16,7 @@ export default function Home() {
       <ConversionArchitecture />
       <Programmi />
       <Press />
+      <Studioos />
       <ServiziSecondari />
       <Founder />
       <CtaFinale />

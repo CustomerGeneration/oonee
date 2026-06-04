@@ -2,11 +2,13 @@ import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { validateSurveyPayload } from "@/lib/survey";
 import { saveLeadToFile, type Lead } from "@/lib/leads";
-import { sendLeadEmail } from "@/lib/email";
+import { sendLeadEmail, sendWaitlistEmail } from "@/lib/email";
 import { saveToFramework360 } from "@/lib/crm";
 
 // fs richiede il runtime Node.js (non Edge)
 export const runtime = "nodejs";
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(req: Request) {
   let body: unknown;
@@ -14,6 +16,36 @@ export async function POST(req: Request) {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "JSON non valido." }, { status: 400 });
+  }
+
+  // --- Lead "lista d'attesa" (es. studioos): riusa lo stesso endpoint/email ---
+  if (
+    typeof body === "object" &&
+    body !== null &&
+    (body as Record<string, unknown>).type === "waitlist"
+  ) {
+    const d = body as Record<string, unknown>;
+    const email = typeof d.email === "string" ? d.email.trim() : "";
+    const nome = typeof d.nome === "string" ? d.nome.trim() : "";
+    const source =
+      typeof d.source === "string" && d.source.trim()
+        ? d.source.trim()
+        : "lista d'attesa";
+
+    if (!EMAIL_RE.test(email)) {
+      return NextResponse.json({ error: "Email non valida." }, { status: 400 });
+    }
+
+    const wait = await sendWaitlistEmail({
+      nome: nome || undefined,
+      email,
+      source,
+      createdAt: new Date().toISOString(),
+    });
+    if (!wait.sent) {
+      console.warn("[Resend] waitlist non inviata:", wait.error);
+    }
+    return NextResponse.json({ ok: true });
   }
 
   const result = validateSurveyPayload(body);

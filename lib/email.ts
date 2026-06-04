@@ -75,3 +75,53 @@ export async function sendLeadEmail(
     return { sent: false, error: e instanceof Error ? e.message : String(e) };
   }
 }
+
+/**
+ * Invia l'email per un lead da lista d'attesa (es. studioos).
+ * Riusa la stessa configurazione Resend e la stessa destinazione (LEAD_EMAIL_TO)
+ * dei lead del sito. Best-effort.
+ */
+export async function sendWaitlistEmail(data: {
+  nome?: string;
+  email: string;
+  source: string;
+  createdAt: string;
+}): Promise<{ sent: boolean; error?: string }> {
+  const apiKey = process.env.RESEND_API_KEY;
+  const to = process.env.LEAD_EMAIL_TO;
+  const from = process.env.LEAD_EMAIL_FROM;
+
+  if (!apiKey || !to || !from) {
+    return {
+      sent: false,
+      error: "Configurazione Resend mancante (RESEND_API_KEY / LEAD_EMAIL_TO / LEAD_EMAIL_FROM).",
+    };
+  }
+
+  const resend = new Resend(apiKey);
+  const html = `
+  <div style="font-family:Inter,Arial,sans-serif;max-width:560px;margin:0 auto">
+    <h2 style="font-size:18px;color:#111">Nuovo lead — lista d'attesa</h2>
+    <p style="color:#666;font-size:14px">Provenienza: <strong>${data.source}</strong><br/>Ricevuto il ${new Date(
+      data.createdAt,
+    ).toLocaleString("it-IT")}</p>
+    <table style="width:100%;border-collapse:collapse;border:1px solid #eee;border-radius:8px;overflow:hidden">
+      <tr><td style="padding:8px 16px;color:#888;font-size:13px">Nome</td><td style="padding:8px 16px;color:#111;font-size:14px;font-weight:600">${data.nome || "—"}</td></tr>
+      <tr><td style="padding:8px 16px;color:#888;font-size:13px">Email</td><td style="padding:8px 16px;color:#111;font-size:14px;font-weight:600"><a href="mailto:${data.email}" style="color:#0099cc">${data.email}</a></td></tr>
+    </table>
+  </div>`;
+
+  try {
+    const { error } = await resend.emails.send({
+      from,
+      to,
+      replyTo: data.email,
+      subject: `Nuovo lead — lista d'attesa (${data.source})`,
+      html,
+    });
+    if (error) return { sent: false, error: error.message ?? String(error) };
+    return { sent: true };
+  } catch (e) {
+    return { sent: false, error: e instanceof Error ? e.message : String(e) };
+  }
+}
