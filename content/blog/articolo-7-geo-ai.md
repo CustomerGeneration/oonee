@@ -1,6 +1,7 @@
 ---
 title: "Stai sparendo da Google? Il marketing si è spostato sulle AI (e quasi nessuno se n'è accorto)"
 slug: geo-farsi-trovare-dalle-ai
+date: "2026-04-16"
 meta_description: "Sempre più persone cercano su ChatGPT e AI invece che su Google. Scopri cos'è la GEO, in cosa differisce dalla SEO e come farti trovare e citare dalle intelligenze artificiali."
 focus_keyword: GEO generative engine optimization
 related_queries:

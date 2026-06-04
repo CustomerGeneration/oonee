@@ -1,6 +1,7 @@
 ---
 title: "Hai traffico ma non vendi? Forse stai guardando il numero sbagliato"
 slug: conversion-architecture-cosa-e
+date: "2026-05-28"
 meta_description: "Se hai visite ma poche vendite, il problema raramente è il traffico. Scopri cos'è la Conversion Architecture e perché lavorare sulla struttura converte più che comprare clic."
 focus_keyword: conversion architecture
 related_queries:

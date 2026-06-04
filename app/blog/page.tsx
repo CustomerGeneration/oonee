@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import Container from "@/components/Container";
-import { getAllPosts } from "@/lib/blog";
+import { formatDate, getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "blog oonee — idee per chi vende online",
@@ -54,7 +54,15 @@ export default function BlogIndexPage() {
                 />
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <h2 className="text-lg font-bold leading-snug tracking-tight">
+                {post.date && (
+                  <time
+                    dateTime={post.date}
+                    className="text-xs uppercase tracking-widest text-white/35"
+                  >
+                    {formatDate(post.date)}
+                  </time>
+                )}
+                <h2 className="mt-2 text-lg font-bold leading-snug tracking-tight">
                   {post.title}
                 </h2>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-white/55">

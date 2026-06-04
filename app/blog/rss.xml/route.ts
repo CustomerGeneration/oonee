@@ -21,7 +21,11 @@ export function GET() {
       <title>${esc(p.title)}</title>
       <link>${SITE}/blog/${p.slug}</link>
       <guid isPermaLink="true">${SITE}/blog/${p.slug}</guid>
-      <description>${esc(p.description)}</description>
+      <description>${esc(p.description)}</description>${
+        p.date
+          ? `\n      <pubDate>${new Date(`${p.date}T08:00:00Z`).toUTCString()}</pubDate>`
+          : ""
+      }
     </item>`,
     )
     .join("\n");

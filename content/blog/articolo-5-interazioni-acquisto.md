@@ -1,6 +1,7 @@
 ---
 title: "Le persone visitano il sito e poi spariscono? Ecco quante volte devono incontrarti prima di comprare"
 slug: quante-interazioni-prima-acquisto
+date: "2026-04-30"
 meta_description: "Un visitatore raramente compra alla prima visita. Scopri quante interazioni servono prima di un acquisto in B2C e B2B e perché un funnel troppo corto ti fa perdere clienti."
 focus_keyword: interazioni prima dell'acquisto
 related_queries:

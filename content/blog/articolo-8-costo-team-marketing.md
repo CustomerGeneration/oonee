@@ -1,6 +1,7 @@
 ---
 title: "Il marketing ti costa sempre di più e rende sempre meno? Forse stai pagando la struttura sbagliata"
 slug: costo-marketing-team-interno-vs-performance
+date: "2026-04-09"
 meta_description: "Il marketing diventa ogni anno più costoso. Scopri quanto costa davvero un team interno completo e perché un modello a performance può generare gli stessi risultati senza i costi fissi."
 focus_keyword: costo team marketing
 related_queries:

@@ -10,11 +10,24 @@ export type BlogMeta = {
   title: string;
   description: string; // meta_description
   cover: string; // /blog/cover-<slug>.jpg
+  date: string; // ISO YYYY-MM-DD (stringa vuota se assente)
   focusKeyword?: string;
   relatedQueries: string[];
   author: string;
   order: number; // dall'ordine del file (articolo-N)
 };
+
+/** Data formattata in italiano, es. "28 maggio 2026". */
+export function formatDate(iso: string): string {
+  if (!iso) return "";
+  const d = new Date(`${iso}T00:00:00`);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("it-IT", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
 
 export type BlogPost = BlogMeta & { html: string };
 
@@ -38,6 +51,7 @@ function parseFile(filename: string): { meta: BlogMeta; content: string } {
       description: String(data.meta_description ?? ""),
       // le cover reali sono nominate cover-<slug>.jpg (il cover_image del frontmatter è impreciso)
       cover: `/blog/cover-${slug}.jpg`,
+      date: data.date ? String(data.date) : "",
       focusKeyword: data.focus_keyword
         ? String(data.focus_keyword)
         : undefined,
@@ -54,7 +68,11 @@ function parseFile(filename: string): { meta: BlogMeta; content: string } {
 export function getAllPosts(): BlogMeta[] {
   return listFiles()
     .map((f) => parseFile(f).meta)
-    .sort((a, b) => a.order - b.order);
+    .sort(
+      (a, b) =>
+        // più recenti prima (per data), fallback all'ordine del file
+        b.date.localeCompare(a.date) || a.order - b.order,
+    );
 }
 
 export function getLatestPosts(n: number): BlogMeta[] {

@@ -1,6 +1,7 @@
 ---
 title: "Il tuo e-commerce può vendere di più (senza spendere di più in pubblicità)"
 slug: revenue-generation-ecommerce
+date: "2026-05-14"
 meta_description: "Il tuo e-commerce vende meno del suo potenziale? Scopri perché le persone abbandonano il carrello, dove comprano davvero e come la Revenue Generation aumenta i ricavi senza alzare il budget ads."
 focus_keyword: revenue generation ecommerce
 related_queries:

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Container from "@/components/Container";
-import { getAllSlugs, getPostBySlug } from "@/lib/blog";
+import { formatDate, getAllSlugs, getPostBySlug } from "@/lib/blog";
 
 const SITE = "https://www.oonee.it";
 
@@ -56,6 +56,9 @@ export default async function ArticlePage({
     headline: post.title,
     description: post.description,
     image: `${SITE}${encodeURI(post.cover)}`,
+    ...(post.date
+      ? { datePublished: post.date, dateModified: post.date }
+      : {}),
     author: { "@type": "Organization", name: "oonee", url: SITE },
     publisher: {
       "@type": "Organization",
@@ -96,7 +99,15 @@ export default async function ArticlePage({
         <h1 className="mt-6 text-3xl font-bold leading-tight tracking-tight sm:text-[2.6rem]">
           {post.title}
         </h1>
-        <p className="mt-4 text-sm text-white/40">di {post.author}</p>
+        <p className="mt-4 text-sm text-white/40">
+          di {post.author}
+          {post.date && (
+            <>
+              {" · "}
+              <time dateTime={post.date}>{formatDate(post.date)}</time>
+            </>
+          )}
+        </p>
 
         <div className="relative mt-8 aspect-[1200/630] w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5">
           <Image

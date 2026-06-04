@@ -1,6 +1,7 @@
 ---
 title: "Raccogli tanti contatti ma vendi poco? Stai generando lead, non clienti"
 slug: lead-vs-clienti-customer-generation
+date: "2026-05-21"
 meta_description: "Perché avere tanti lead non significa avere clienti. Scopri la differenza tra lead generation e Customer Generation e perché un solo canale converte 11 volte più di un altro."
 focus_keyword: customer generation
 related_queries:

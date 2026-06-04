@@ -1,6 +1,7 @@
 ---
 title: "Il marketing che parla a tutti non vende a nessuno: la verità sull'iper-personalizzazione"
 slug: iper-personalizzazione-marketing
+date: "2026-05-07"
 meta_description: "Le persone non sono bombardate dalla pubblicità: ci sono immerse. Scopri perché l'iper-personalizzazione è il futuro del marketing e come parlare al singolo prospect aumenta le conversioni."
 focus_keyword: iper-personalizzazione marketing
 related_queries:

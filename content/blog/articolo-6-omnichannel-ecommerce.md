@@ -1,6 +1,7 @@
 ---
 title: "Come aumentare le vendite dell'e-commerce: la leva che premia di più chi è sotto i 10 milioni"
 slug: aumentare-vendite-ecommerce-omnichannel
+date: "2026-04-23"
 meta_description: "Vuoi aumentare le vendite del tuo e-commerce? La strategia omnichannel aumenta il ROI fino al 14%, e premia di più le aziende piccole e medie. Ecco perché e come funziona."
 focus_keyword: aumentare vendite ecommerce
 related_queries:
