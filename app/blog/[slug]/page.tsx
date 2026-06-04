@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import Container from "@/components/Container";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
 
-const SITE = "https://oonee.it";
+const SITE = "https://www.oonee.it";
 
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -68,6 +68,21 @@ export default async function ArticlePage({
     },
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+      { "@type": "ListItem", position: 2, name: "blog", item: `${SITE}/blog` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `${SITE}/blog/${slug}`,
+      },
+    ],
+  };
+
   return (
     <article className="py-24 sm:py-32">
       <Container className="max-w-3xl">
@@ -115,7 +130,9 @@ export default async function ArticlePage({
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([jsonLd, breadcrumbJsonLd]),
+        }}
       />
     </article>
   );

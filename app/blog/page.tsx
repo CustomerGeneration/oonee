@@ -8,7 +8,10 @@ export const metadata: Metadata = {
   title: "blog oonee — idee per chi vende online",
   description:
     "Articoli su Conversion Architecture, Customer Generation, ecommerce e iper-personalizzazione. Idee concrete per chi vende online davvero.",
-  alternates: { canonical: "/blog" },
+  alternates: {
+    canonical: "/blog",
+    types: { "application/rss+xml": "/blog/rss.xml" },
+  },
   openGraph: {
     title: "blog oonee",
     description: "Idee per chi vende online davvero.",

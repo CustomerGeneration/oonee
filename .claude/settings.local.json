@@ -54,7 +54,9 @@
       "Bash(sips --resampleWidth 1300 /tmp/v3-press2.png --out /tmp/v3-press3-s.png)",
       "Bash(mv blog-oonee/articoli/*.md content/blog/)",
       "Bash(mv blog-oonee/cover/*.jpg public/blog/)",
-      "Bash(mv blog-oonee/immagini/*.png public/blog/)"
+      "Bash(mv blog-oonee/immagini/*.png public/blog/)",
+      "Bash(node /tmp/oonee-shot/og.mjs)",
+      "Bash(awk '{print $9,$5}')"
     ]
   }
 }
