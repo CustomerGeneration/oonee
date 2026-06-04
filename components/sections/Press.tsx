@@ -5,17 +5,20 @@ type PressItem = {
   outlet: string;
   title: string;
   href: string | null; // null = link non ancora disponibile
+  logo?: string; // logo bianco su trasparente (se disponibile)
 };
 
 const PRESS: PressItem[] = [
   {
     outlet: "Fortune Italia",
+    logo: "/fortune-white.png",
     title:
       "La Calabria diventa hub tecnologico: l'AI rivoluziona il marketing digitale",
     href: "https://www.fortuneita.com/2025/12/21/la-calabria-diventa-hub-tecnologico-lai-rivoluziona-il-marketing-digitale-dalle-coste-del-sud-il-commento-di-angelo-nico-maiolini/",
   },
   {
     outlet: "Economy Magazine",
+    logo: "/economy-white.png",
     title:
       "Dai troppi bit all'iper-personalizzazione, ecco il nuovo marketing",
     href: "https://www.economymagazine.it/maiolini-dai-troppi-bit-alliper-personalizzazione-ecco-il-nuovo-marketing/",
@@ -56,9 +59,20 @@ export default function Press() {
               delay={(i % 2) * 0.1}
               className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-8 transition duration-300 hover:border-accent/50 hover:shadow-[0_0_50px_-20px_rgba(0,153,204,0.55)] sm:p-10"
             >
-              <h3 className="text-2xl font-bold tracking-tight">
-                {item.outlet}
-              </h3>
+              <div className="flex h-10 items-center">
+                {item.logo ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={item.logo}
+                    alt={item.outlet}
+                    className="h-9 w-auto max-w-[200px] object-contain object-left"
+                  />
+                ) : (
+                  <h3 className="text-2xl font-bold tracking-tight">
+                    {item.outlet}
+                  </h3>
+                )}
+              </div>
               <p className="mt-3 text-sm leading-relaxed text-white/50">
                 {item.title}
               </p>

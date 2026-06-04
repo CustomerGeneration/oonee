@@ -32,7 +32,9 @@
       "Bash(curl -s http://localhost:3000)",
       "Bash(sips -g pixelWidth -g pixelHeight public/founder-immagine.jpeg)",
       "Bash(npm install *)",
-      "Bash(node /tmp/oonee-shot/assets.mjs)"
+      "Bash(node /tmp/oonee-shot/assets.mjs)",
+      "Bash(awk '{print $9, $5}')",
+      "Bash(node /tmp/oonee-shot/whitelogos.mjs)"
     ]
   }
 }
