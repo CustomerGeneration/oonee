@@ -29,7 +29,10 @@
       "Bash(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/cookie-policy)",
       "Bash(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/termini-e-condizioni)",
       "Bash(echo \"home $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000\\) | privacy $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/privacy-policy\\) | cookie $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/cookie-policy\\) | termini $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/termini-e-condizioni\\)\")",
-      "Bash(curl -s http://localhost:3000)"
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(sips -g pixelWidth -g pixelHeight public/founder-immagine.jpeg)",
+      "Bash(npm install *)",
+      "Bash(node /tmp/oonee-shot/assets.mjs)"
     ]
   }
 }

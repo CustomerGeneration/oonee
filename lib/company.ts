@@ -3,7 +3,7 @@
  * Usati nel footer e nelle pagine legali.
  */
 export const COMPANY = {
-  brand: "Oonee",
+  brand: "oonee",
   legalName: "Ad Maiora srls",
   vat: "03927840789",
   address: "Piazza Sant'Antonio 18, Cropalati (CS)",

@@ -45,7 +45,7 @@ export default function Hero() {
         {mounted && (
           <iframe
             src={SCENE_VIEWER_URL}
-            title="Oonee — Marketing Agency specializzata in Conversion Architecture"
+            title="oonee — Marketing Agency specializzata in Conversion Architecture"
             onLoad={() => setLoaded(true)}
             allow="autoplay; fullscreen; xr-spatial-tracking"
             className="absolute inset-0 h-full w-full border-0"

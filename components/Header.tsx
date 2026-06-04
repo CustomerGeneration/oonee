@@ -18,9 +18,15 @@ export default function Header() {
         <Link
           href="/"
           onClick={() => setOpen(false)}
-          className="text-lg font-bold tracking-tight text-white transition-opacity hover:opacity-70 sm:text-xl"
+          aria-label="oonee — home"
+          className="inline-flex items-center transition-opacity hover:opacity-70"
         >
-          oonee
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo-oonee.svg"
+            alt="oonee"
+            className="h-8 w-auto sm:h-9"
+          />
         </Link>
 
         {/* Nav desktop */}

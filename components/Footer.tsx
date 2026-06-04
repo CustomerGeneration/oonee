@@ -23,7 +23,7 @@ export default function Footer() {
               oonee
             </Link>
             <p className="mt-4 text-sm text-white/40">
-              © 2026 Oonee. All rights reserved.
+              © 2026 oonee. All rights reserved.
             </p>
           </div>
 

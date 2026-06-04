@@ -7,7 +7,7 @@ import { COMPANY } from "@/lib/company";
 export const metadata: Metadata = {
   title: "Cookie Policy",
   description:
-    "Informativa sull'uso dei cookie e delle tecnologie di tracciamento sul sito Oonee.",
+    "Informativa sull'uso dei cookie e delle tecnologie di tracciamento sul sito oonee.",
 };
 
 export default function CookiePolicyPage() {

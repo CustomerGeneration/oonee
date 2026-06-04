@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Container from "@/components/Container";
 import Reveal from "@/components/Reveal";
 
@@ -7,17 +8,21 @@ export default function Founder() {
       <Container>
         <Reveal>
           <h2 className="text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
-            Chi c&apos;è dietro Oonee.
+            Chi c&apos;è dietro oonee.
           </h2>
         </Reveal>
 
         <div className="mt-10 grid grid-cols-1 gap-10 sm:mt-16 md:grid-cols-[300px_1fr] md:gap-16">
-          {/* Avatar founder — TODO: sostituire con foto reale */}
+          {/* Foto founder */}
           <Reveal className="flex justify-center md:justify-start">
-            <div className="flex h-[200px] w-[200px] items-center justify-center rounded-full border border-accent/60 bg-gradient-to-br from-[#0099CC] to-[#003366] shadow-[0_0_70px_-15px_rgba(0,153,204,0.7)] md:h-[300px] md:w-[300px]">
-              <span className="text-5xl font-bold tracking-tight text-white md:text-7xl">
-                ANM
-              </span>
+            <div className="relative h-[200px] w-[200px] overflow-hidden rounded-full border border-accent/60 shadow-[0_0_70px_-15px_rgba(0,153,204,0.7)] md:h-[300px] md:w-[300px]">
+              <Image
+                src="/founder.jpg"
+                alt="Angelo Nico Maiolini"
+                fill
+                sizes="(min-width: 768px) 300px, 200px"
+                className="object-cover object-center"
+              />
             </div>
           </Reveal>
 

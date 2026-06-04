@@ -6,7 +6,7 @@ import { COMPANY } from "@/lib/company";
 export const metadata: Metadata = {
   title: "Termini e Condizioni",
   description:
-    "Termini e condizioni di utilizzo del sito Oonee, marchio di Ad Maiora srls.",
+    "Termini e condizioni di utilizzo del sito oonee, marchio di Ad Maiora srls.",
 };
 
 export default function TerminiPage() {

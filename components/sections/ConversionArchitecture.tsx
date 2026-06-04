@@ -50,7 +50,7 @@ export default function ConversionArchitecture() {
       <Container>
         <Reveal>
           <h2 className="max-w-4xl text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
-            La Conversion Architecture è il metodo proprietario di Oonee.
+            La Conversion Architecture è il metodo proprietario di oonee.
           </h2>
         </Reveal>
 

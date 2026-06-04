@@ -14,13 +14,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://oonee.it"),
   title: {
-    default: "Oonee — Marketing Agency specializzata in Conversion Architecture",
-    template: "%s — Oonee",
+    default: "oonee — Marketing Agency specializzata in Conversion Architecture",
+    template: "%s — oonee",
   },
   description:
-    "Non vendiamo marketing. Generiamo clienti. Oonee è la marketing agency italiana specializzata in Conversion Architecture, il metodo proprietario che fa convertire davvero.",
+    "Non vendiamo marketing. Generiamo clienti. oonee è la marketing agency italiana specializzata in Conversion Architecture, il metodo proprietario che fa convertire davvero.",
   openGraph: {
-    title: "Oonee — Conversion Architecture",
+    title: "oonee — Conversion Architecture",
     description: "Non vendiamo marketing. Generiamo clienti.",
     type: "website",
     locale: "it_IT",
