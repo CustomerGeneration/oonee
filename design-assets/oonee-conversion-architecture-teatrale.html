@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>oonee — Conversion Architecture (teatrale)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050810; --bg2:#0A1120;
+  --ink:#EAF1FB; --muted:#8A99AE; --muted2:#566480;
+  --accent:#3EB4F7; --accent-bright:#A9E0FF;
+  --line:rgba(255,255,255,.06); --card:rgba(255,255,255,.022);
+  --maxw:1080px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:"Manrope",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+/* atmosphere */
+.bp{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(62,180,247,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(62,180,247,.045) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask-image:radial-gradient(130% 80% at 50% 30%,#000 0%,transparent 80%);
+  mask-image:radial-gradient(130% 80% at 50% 30%,#000 0%,transparent 80%);opacity:.6;}
+.vig{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 42%,transparent 40%,rgba(0,0,0,.55) 100%);}
+.bloom{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;background:radial-gradient(60% 55% at 50% 60%,rgba(62,180,247,.16),transparent 70%);}
+body.finale .bloom{animation:bloom 1.3s ease-out;}
+@keyframes bloom{0%{opacity:0}28%{opacity:1}100%{opacity:0}}
+.wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+.hint{height:34vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:14px;text-align:center;}
+.hint .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.26em;color:var(--accent);text-transform:uppercase;}
+.hint .arrow{width:20px;height:20px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);animation:bob 1.8s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:rotate(45deg) translate(0,0);opacity:.4}50%{transform:rotate(45deg) translate(4px,4px);opacity:1}}
+
+.ca-intro{padding:7vh 0 5vh;max-width:780px;}
+.ca-intro>*{opacity:0;transform:translateY(20px);}
+.ca-intro.in .eyebrow{animation:rise .7s .05s forwards;}
+.ca-intro.in h2{animation:rise .85s .2s forwards;}
+.ca-intro.in p{animation:rise .85s .38s forwards;}
+@keyframes rise{to{opacity:1;transform:none;}}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--accent);opacity:.7;}
+h2.ca-title{font-family:"Sora",sans-serif;font-weight:800;font-size:clamp(30px,5vw,52px);line-height:1.05;letter-spacing:-.02em;margin:22px 0 24px;}
+h2.ca-title .lo{color:var(--accent-bright);}
+.ca-intro p{font-size:clamp(15px,1.6vw,18px);line-height:1.7;color:var(--muted);margin:0;max-width:640px;}
+
+.flow{position:relative;padding:3vh 0 5vh;}
+.spine{position:absolute;top:0;bottom:0;left:50%;width:2px;transform:translateX(-50%);background:var(--line);border-radius:2px;}
+.spine-fill{position:absolute;top:0;left:0;width:100%;height:0;border-radius:2px;
+  background:linear-gradient(180deg,rgba(62,180,247,.12),var(--accent) 30%,var(--accent-bright) 50%,var(--accent) 70%);
+  background-size:100% 240px;box-shadow:0 0 16px rgba(62,180,247,.5);will-change:height;animation:flowlight 2.4s linear infinite;}
+@keyframes flowlight{from{background-position:0 240px}to{background-position:0 0}}
+/* comet */
+.comet{position:absolute;left:50%;top:0;width:16px;height:16px;border-radius:50%;transform:translate(-50%,-50%);background:var(--accent-bright);box-shadow:0 0 0 4px rgba(62,180,247,.18),0 0 26px 7px rgba(62,180,247,.7);will-change:top;opacity:0;transition:opacity .35s;z-index:4;}
+.flow.lit .comet{opacity:1;}
+.comet::before{content:"";position:absolute;left:50%;bottom:55%;transform:translateX(-50%);width:3px;height:78px;border-radius:3px;background:linear-gradient(180deg,rgba(169,224,255,0),rgba(62,180,247,.9));filter:blur(.4px);}
+.comet::after{content:"";position:absolute;inset:-11px;border-radius:50%;background:radial-gradient(circle,rgba(62,180,247,.55),transparent 70%);animation:halo 1.7s ease-in-out infinite;}
+@keyframes halo{0%,100%{transform:scale(.8);opacity:.5}50%{transform:scale(1.3);opacity:.95}}
+/* finale surge */
+.surge{position:absolute;left:50%;top:0;width:2px;height:100%;transform:translateX(-50%);border-radius:2px;opacity:0;
+  background:linear-gradient(180deg,transparent 0%,var(--accent-bright) 50%,transparent 100%);background-size:100% 38%;background-repeat:no-repeat;background-position:0 -38%;
+  box-shadow:0 0 20px rgba(169,224,255,.8);z-index:3;}
+.flow.finale .surge{opacity:1;animation:surge 1s ease-out;}
+@keyframes surge{from{background-position:0 -38%}to{background-position:0 138%}}
+
+.node{position:relative;display:grid;grid-template-columns:1fr 96px 1fr;align-items:center;min-height:320px;}
+.spot{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .7s ease;z-index:0;}
+.node-left .spot{background:radial-gradient(440px 340px at 32% 50%,rgba(62,180,247,.11),transparent 68%);}
+.node-right .spot{background:radial-gradient(440px 340px at 68% 50%,rgba(62,180,247,.11),transparent 68%);}
+.node.current .spot{opacity:1;}
+
+.connector{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;}
+.knob{position:absolute;left:0;top:0;width:13px;height:13px;border-radius:50%;transform:translate(-50%,-50%);background:var(--bg2);border:2px solid var(--muted2);transition:all .5s cubic-bezier(.2,.7,.2,1);}
+.node.active .knob{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px rgba(62,180,247,.12),0 0 18px 3px rgba(62,180,247,.6);}
+.lockring{position:absolute;left:0;top:0;width:13px;height:13px;border-radius:50%;border:2px solid var(--accent-bright);transform:translate(-50%,-50%) scale(1);opacity:0;}
+.node.active .lockring{animation:lock .7s ease-out;}
+@keyframes lock{0%{opacity:.9;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(3.6)}}
+.branch{position:absolute;top:0;height:2px;width:48px;transform:translateY(-50%) scaleX(0);transition:transform .55s cubic-bezier(.2,.7,.2,1);}
+.node-left .branch{right:0;transform-origin:right center;background:linear-gradient(270deg,var(--accent),rgba(62,180,247,0));}
+.node-right .branch{left:0;transform-origin:left center;background:linear-gradient(90deg,var(--accent),rgba(62,180,247,0));}
+.node.active .branch{transform:translateY(-50%) scaleX(1);}
+
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 30px 32px;backdrop-filter:blur(2px);max-width:430px;z-index:1;
+  opacity:0;filter:blur(5px);transition:opacity .7s ease,transform .75s cubic-bezier(.2,.8,.2,1),border-color .7s,filter .6s ease,box-shadow .7s;will-change:transform,opacity,filter;}
+.node-left .card{grid-column:1;justify-self:end;margin-right:34px;transform:translateX(-40px) translateY(16px) scale(.95);}
+.node-right .card{grid-column:3;justify-self:start;margin-left:34px;transform:translateX(40px) translateY(16px) scale(.95);}
+.node.active .card{opacity:1;filter:blur(0);transform:translateX(0) translateY(0) scale(1);border-color:rgba(62,180,247,.26);}
+.node.current .card{border-color:rgba(62,180,247,.4);box-shadow:0 24px 70px -28px rgba(62,180,247,.5);}
+.card .num{position:absolute;top:12px;right:20px;font-family:"Sora",sans-serif;font-weight:800;font-size:84px;line-height:1;color:rgba(62,180,247,.07);letter-spacing:-.04em;pointer-events:none;transition:color .7s;}
+.node.current .card .num{color:rgba(62,180,247,.13);}
+/* cascade of inner elements */
+.card .ico,.card .lab,.card h3,.card p,.card blockquote,.card cite{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .55s cubic-bezier(.2,.8,.2,1);}
+.node.active .card .ico{opacity:1;transform:none;transition-delay:.14s;}
+.node.active .card .lab{opacity:1;transform:none;transition-delay:.22s;}
+.node.active .card h3{opacity:1;transform:none;transition-delay:.3s;}
+.node.active .card p,.node.active .card blockquote{opacity:1;transform:none;transition-delay:.38s;}
+.node.active .card cite{opacity:1;transform:none;transition-delay:.48s;}
+.card .ico{width:30px;height:30px;color:var(--accent);margin-bottom:24px;display:block;}
+.card .lab{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.22em;color:var(--accent);margin-bottom:12px;}
+.card h3{font-family:"Sora",sans-serif;font-weight:700;font-size:20px;letter-spacing:.005em;margin:0 0 14px;text-transform:uppercase;line-height:1.22;}
+.card p{margin:0;color:var(--muted);font-size:15px;line-height:1.65;}
+.card blockquote{margin:0;padding-left:16px;border-left:2px solid var(--accent);font-style:italic;color:#C7D3E3;font-size:15.5px;line-height:1.6;}
+.card cite{display:block;margin-top:14px;font-style:normal;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;color:var(--muted2);}
+
+.node-end{grid-template-columns:1fr;min-height:280px;justify-items:center;text-align:center;}
+.endknob{width:22px;height:22px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px rgba(62,180,247,.14),0 0 30px 9px rgba(62,180,247,.6);margin:0 auto 26px;opacity:0;transform:scale(.3);transition:all .6s cubic-bezier(.2,.8,.2,1);}
+.node-end.active .endknob{opacity:1;transform:scale(1);}
+.endcard .conv,.endcard .big,.endcard .payoff,.endcard .cta{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .65s cubic-bezier(.2,.8,.2,1);}
+.node-end.active .endcard .conv{opacity:1;transform:none;transition-delay:.05s;}
+.node-end.active .endcard .big{opacity:1;transform:none;transition-delay:.18s;}
+.node-end.active .endcard .payoff{opacity:1;transform:none;transition-delay:.34s;}
+.node-end.active .endcard .cta{opacity:1;transform:none;transition-delay:.5s;}
+.endcard .conv{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.3em;color:var(--accent);margin-bottom:16px;}
+.endcard .big{font-family:"Sora",sans-serif;font-weight:800;font-size:clamp(23px,3.6vw,36px);letter-spacing:-.02em;line-height:1.16;}
+.endcard .big .g{color:var(--accent-bright);}
+.endcard .payoff{margin-top:16px;font-family:"Sora",sans-serif;font-weight:600;font-size:clamp(16px,2vw,20px);color:#D6E2F0;letter-spacing:.005em;}
+.endcard .cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:15px 30px;border-radius:999px;background:linear-gradient(180deg,#5cc3ff,#2ea2ef);color:#04121f;font-family:"Sora",sans-serif;font-weight:700;font-size:15px;text-decoration:none;letter-spacing:.01em;box-shadow:0 0 0 1px rgba(169,224,255,.4),0 14px 42px -10px rgba(62,180,247,.75);transition:transform .25s ease,box-shadow .25s ease;}
+.endcard .cta:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(169,224,255,.6),0 22px 56px -10px rgba(62,180,247,.95);}
+.endcard .cta-ar{transition:transform .25s ease;}
+.endcard .cta:hover .cta-ar{transform:translateX(4px);}
+
+.tail{height:26vh;}
+
+@media (max-width:820px){
+  .spine,.comet,.surge{left:26px;}
+  .node{grid-template-columns:52px 1fr;min-height:0;margin-bottom:54px;}
+  .connector{left:26px;}
+  .spot{background:radial-gradient(520px 360px at 60% 50%,rgba(62,180,247,.12),transparent 70%)!important;}
+  .branch,.node-left .branch,.node-right .branch{left:0;right:auto;width:28px;transform-origin:left center;background:linear-gradient(90deg,var(--accent),rgba(62,180,247,0));transform:translateY(-50%) scaleX(0);}
+  .node.active .branch{transform:translateY(-50%) scaleX(1);}
+  .node-left .card,.node-right .card{grid-column:2;justify-self:stretch;margin:0 0 0 22px;max-width:none;transform:translateX(28px) translateY(14px) scale(.96);}
+  .node.active .card{transform:none;}
+  .card .num{font-size:62px;}
+  .node-end{grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:reduce){
+  .ca-intro>*{opacity:1!important;transform:none!important;}
+  .card,.node-left .card,.node-right .card{opacity:1!important;filter:none!important;transform:none!important;}
+  .card .ico,.card .lab,.card h3,.card p,.card blockquote,.card cite{opacity:1!important;transform:none!important;}
+  .endcard .conv,.endcard .big,.endcard .payoff,.endcard .cta,.endknob{opacity:1!important;transform:none!important;}
+  .branch{transform:translateY(-50%) scaleX(1)!important;}
+  .comet,.spine-fill{animation:none!important;}
+  .comet{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="bp"></div>
+<div class="vig"></div>
+<div class="bloom"></div>
+<div class="wrap">
+
+  <div class="hint">
+    <span class="k">preview teatrale · scorri verso il basso</span>
+    <span class="arrow"></span>
+  </div>
+
+  <div class="ca-intro" id="intro">
+    <div class="eyebrow">il metodo</div>
+    <h2 class="ca-title">La Conversion Architecture è il metodo proprietario di <span class="lo">oonee</span>.</h2>
+    <p>Non è un funnel. Non è una strategia pre-confezionata. Non è il template che vedi su LinkedIn. È un'architettura cucita su misura per il tuo business: costruita step dopo step, partendo da chi vendi, non dal canale che usi.</p>
+  </div>
+
+  <div class="flow" id="flow">
+    <div class="spine"><div class="spine-fill" id="fill"></div></div>
+    <div class="surge"></div>
+    <div class="comet" id="comet"></div>
+
+    <div class="node node-left">
+      <div class="spot"></div>
+      <div class="card">
+        <span class="num">01</span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v18"/><path d="M3 22h18"/><path d="M9 7h2M9 11h2M9 15h2M14 7h1M14 11h1M14 15h1"/></svg>
+        <div class="lab">01</div>
+        <h3>Parte dal business, non dal canale</h3>
+        <p>Prima di scegliere come comunicare, capiamo cosa vendi, a chi, e perché dovrebbero comprare da te.</p>
+      </div>
+      <span class="connector"><span class="branch"></span><span class="lockring"></span><span class="knob"></span></span>
+    </div>
+
+    <div class="node node-right">
+      <div class="spot"></div>
+      <div class="card">
+        <span class="num">02</span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="8" r="2.4"/><path d="M6 8.4v7.2"/><path d="M18 10.4a6 6 0 0 1-6 6H8.4"/></svg>
+        <div class="lab">02</div>
+        <h3>È un funnel adattivo</h3>
+        <blockquote>"Il funnel adattivo costruisce un percorso su misura per ogni singolo utente, step dopo step, abbandonando l'approccio generico."</blockquote>
+        <cite>— Angelo Maiolini, Economy Magazine</cite>
+      </div>
+      <span class="connector"><span class="branch"></span><span class="lockring"></span><span class="knob"></span></span>
+    </div>
+
+    <div class="node node-left">
+      <div class="spot"></div>
+      <div class="card">
+        <span class="num">03</span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>
+        <div class="lab">03</div>
+        <h3>È iper-personalizzata</h3>
+        <p>Non comunichiamo a un pubblico. Comunichiamo a una persona. Concentrandoci non sul prodotto in sé, ma su come quel prodotto risolva concretamente il suo problema specifico.</p>
+      </div>
+      <span class="connector"><span class="branch"></span><span class="lockring"></span><span class="knob"></span></span>
+    </div>
+
+    <div class="node node-right">
+      <div class="spot"></div>
+      <div class="card">
+        <span class="num">04</span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.6 11A8 8 0 0 1 18.4 7.2"/><path d="M8.2 8.6A5 5 0 0 1 17 12c0 1.8-.3 3.4-.9 5"/><path d="M11 10.2a2.2 2.2 0 0 0-1.5 3.6c1.1 1.4 1.6 3 1.6 4.7"/><path d="M13.7 17.6c.3-1 .4-2 .3-3"/></svg>
+        <div class="lab">04</div>
+        <h3>Non è copiabile</h3>
+        <p>Ogni Conversion Architecture è unica perché ogni business è unico. Per questo funziona. Per questo non si replica.</p>
+      </div>
+      <span class="connector"><span class="branch"></span><span class="lockring"></span><span class="knob"></span></span>
+    </div>
+
+    <div class="node node-end">
+      <div class="spot"></div>
+      <div class="endcard">
+        <div class="endknob"></div>
+        <div class="conv">= il risultato</div>
+        <div class="big">La tua <span class="g">Conversion Architecture</span>.<br>Una sola. Irripetibile. Funzionante.</div>
+        <div class="payoff">Vendi di più.</div>
+        <a class="cta" href="#" onclick="return false;">Inizia da qui<span class="cta-ar">&#8594;</span></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tail"></div>
+</div>
+
+<script>
+(function(){
+  var flow=document.getElementById('flow');
+  var fill=document.getElementById('fill');
+  var comet=document.getElementById('comet');
+  var nodes=[].slice.call(flow.querySelectorAll('.node'));
+  var endNode=nodes[nodes.length-1];
+  var finaleDone=false;
+  var ticking=false;
+
+  // intro reveal
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    },{threshold:.25});
+    io.observe(document.getElementById('intro'));
+  } else { document.getElementById('intro').classList.add('in'); }
+
+  function update(){
+    ticking=false;
+    var vh=window.innerHeight;
+    var rect=flow.getBoundingClientRect();
+    var anchor=vh*0.58;
+    var fillPx=anchor-rect.top;
+    fillPx=Math.max(0,Math.min(rect.height,fillPx));
+    fill.style.height=fillPx+'px';
+    comet.style.top=fillPx+'px';
+    flow.classList.toggle('lit',fillPx>4 && fillPx<rect.height-2);
+
+    var currentIdx=-1, currentCenter=-1;
+    for(var i=0;i<nodes.length;i++){
+      var c=nodes[i].offsetTop+nodes[i].offsetHeight/2;
+      var on=fillPx>=c-8;
+      nodes[i].classList.toggle('active',on);
+      if(on && c>currentCenter){ currentCenter=c; currentIdx=i; }
+    }
+    for(var j=0;j<nodes.length;j++){ nodes[j].classList.toggle('current', j===currentIdx); }
+
+    if(!finaleDone && endNode.classList.contains('active')){
+      finaleDone=true;
+      flow.classList.add('finale');
+      document.body.classList.add('finale');
+    }
+  }
+  function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(update);} }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  update();
+})();
+</script>
+</body>
+</html>

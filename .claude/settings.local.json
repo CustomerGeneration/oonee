@@ -56,7 +56,27 @@
       "Bash(mv blog-oonee/cover/*.jpg public/blog/)",
       "Bash(mv blog-oonee/immagini/*.png public/blog/)",
       "Bash(node /tmp/oonee-shot/og.mjs)",
-      "Bash(awk '{print $9,$5}')"
+      "Bash(awk '{print $9,$5}')",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/blog)",
+      "Bash(echo \"status /blog: $\\(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/blog\\)\")",
+      "Bash(curl -s -L --max-time 20 https://www.oonee.it/blog)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/blog/conversion-architecture-cosa-e)",
+      "Bash(echo \"status articolo: $\\(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/blog/conversion-architecture-cosa-e\\)\")",
+      "Bash(curl -s -L --max-time 20 https://www.oonee.it)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/sitemap.xml)",
+      "Bash(echo \"status sitemap: $\\(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/sitemap.xml\\)\")",
+      "Bash(vercel --version)",
+      "Bash(vercel whoami *)",
+      "Bash(vercel projects *)",
+      "Bash(vercel ls *)",
+      "Bash(vercel link *ù)",
+      "Bash(vercel --prod --yes)",
+      "Bash(vercel rm *)",
+      "Bash(echo \"/blog:        $\\(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/blog\\)\")",
+      "Bash(echo \"/blog/conversion-architecture-cosa-e: $\\(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/blog/conversion-architecture-cosa-e\\)\")",
+      "Bash(echo \"/sitemap.xml: $\\(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/sitemap.xml\\)\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/blog/rss.xml)",
+      "Bash(echo \"/blog/rss.xml: $\\(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/blog/rss.xml\\)\")"
     ]
   }
 }
