@@ -76,7 +76,14 @@
       "Bash(echo \"/blog/conversion-architecture-cosa-e: $\\(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/blog/conversion-architecture-cosa-e\\)\")",
       "Bash(echo \"/sitemap.xml: $\\(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/sitemap.xml\\)\")",
       "Bash(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/blog/rss.xml)",
-      "Bash(echo \"/blog/rss.xml: $\\(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/blog/rss.xml\\)\")"
+      "Bash(echo \"/blog/rss.xml: $\\(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://www.oonee.it/blog/rss.xml\\)\")",
+      "Bash(git commit -m 'chore: salvataggio stato attuale prima del redesign Conversion Architecture *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(open *)",
+      "Read(//tmp/**)",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill -9)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000)"
     ]
   }
 }
