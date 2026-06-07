@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>oonee — Due verticali (preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070C16;
+  --ink:#EAF1FB; --muted:#8A99AE; --muted2:#5A6A82;
+  --accent:#3EB4F7; --accent-bright:#A9E0FF;
+  --line:rgba(255,255,255,.07);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:"Manrope",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding:8vh 0 12vh;}
+.bp{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(62,180,247,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(62,180,247,.04) 1px,transparent 1px);
+  background-size:48px 48px;-webkit-mask-image:radial-gradient(130% 70% at 50% 18%,#000,transparent 75%);mask-image:radial-gradient(130% 70% at 50% 18%,#000,transparent 75%);opacity:.5;}
+
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 32px;}
+.neural{position:absolute;inset:0;z-index:0;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.10) 0%,#000 22%,#000 93%,transparent 100%);
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.10) 0%,#000 22%,#000 93%,transparent 100%);}
+.content{position:relative;z-index:1;}
+
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:20px;opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1);}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--accent);opacity:.7;}
+h2{font-family:"Sora",sans-serif;font-weight:800;font-size:clamp(33px,5.6vw,62px);letter-spacing:-.025em;line-height:1.02;margin:0;opacity:0;transform:translateY(16px);transition:opacity .7s ease .08s,transform .8s cubic-bezier(.2,.8,.2,1) .08s;}
+.intro{color:var(--muted);font-size:clamp(15px,1.6vw,18px);line-height:1.65;margin:22px 0 0;max-width:640px;opacity:0;transform:translateY(16px);transition:opacity .7s ease .16s,transform .8s cubic-bezier(.2,.8,.2,1) .16s;}
+.intro b{color:#C8D4E3;font-weight:600;}
+.cred{margin-top:26px;display:inline-flex;align-items:center;gap:10px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.04em;color:#BFD0E4;border:1px solid var(--line);background:rgba(62,180,247,.05);border-radius:999px;padding:9px 16px;opacity:0;transform:translateY(14px);transition:opacity .7s ease .24s,transform .8s cubic-bezier(.2,.8,.2,1) .24s;}
+.cred .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px 2px rgba(62,180,247,.7);}
+.reveal.in .eyebrow,.reveal.in h2,.reveal.in .intro,.reveal.in .cred{opacity:1;transform:none;}
+
+.fork{display:flex;flex-direction:column;align-items:center;margin:48px 0 4px;}
+.fork .lab{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted2);margin-bottom:14px;opacity:0;transition:opacity .8s ease .35s;}
+.reveal.in .fork .lab{opacity:1;}
+.fork svg{width:320px;height:118px;max-width:90%;}
+.fork .ln{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-dasharray:200;stroke-dashoffset:200;transition:stroke-dashoffset 1s ease .45s;filter:drop-shadow(0 0 5px rgba(62,180,247,.5));}
+.reveal.in .fork .ln{stroke-dashoffset:0;}
+.fork .node{fill:var(--accent-bright);opacity:0;transform:scale(.4);transform-origin:center;transition:all .6s cubic-bezier(.2,.8,.2,1) .3s;filter:drop-shadow(0 0 10px rgba(62,180,247,.9));}
+.reveal.in .fork .node{opacity:1;transform:scale(1);}
+.fork .tip{fill:var(--accent);opacity:0;transition:opacity .5s ease 1s;}
+.reveal.in .fork .tip{opacity:1;}
+
+/* ===== two panels, perfectly aligned via subgrid ===== */
+.verticals{display:grid;grid-template-columns:1fr 1fr;column-gap:26px;row-gap:20px;grid-template-rows:repeat(9,auto);margin-top:10px;}
+.panel{--off:0s;grid-row:1 / span 9;display:grid;grid-template-rows:subgrid;gap:inherit;
+  position:relative;border-radius:24px;padding:42px 40px 40px;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 0%,rgba(62,180,247,.10),transparent 55%),rgba(9,14,24,.80);
+  border:1px solid rgba(62,180,247,.18);
+  box-shadow:0 30px 80px -40px rgba(62,180,247,.45),inset 0 1px 0 rgba(255,255,255,.04);
+  opacity:0;transform:scale(.99);transition:opacity .7s ease,transform .4s ease,border-color .4s,box-shadow .4s;}
+.panel.p1{grid-column:1;}
+.panel.p2{grid-column:2;--off:.4s;}
+.reveal.in .panel{opacity:1;transform:none;animation:panelIgnite 1.2s ease-out;animation-delay:calc(var(--off) + .05s);}
+.panel:hover{border-color:rgba(62,180,247,.42);box-shadow:0 40px 100px -36px rgba(62,180,247,.7),inset 0 1px 0 rgba(255,255,255,.05);transform:translateY(-4px);}
+.panel .motif{position:absolute;top:-26px;right:-30px;height:340px;opacity:.16;pointer-events:none;z-index:0;}
+/* light sweep across the panel on reveal */
+.panel::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,transparent 32%,rgba(169,224,255,.14) 48%,transparent 64%);transform:translateX(-130%);opacity:0;}
+.reveal.in .panel::after{animation:sweep 1.05s ease-out both;animation-delay:calc(var(--off) + .28s);}
+
+@keyframes panelIgnite{
+  0%{box-shadow:0 20px 60px -42px rgba(62,180,247,.12);border-color:rgba(62,180,247,.08);}
+  35%{box-shadow:0 46px 120px -26px rgba(62,180,247,.95),inset 0 0 36px rgba(62,180,247,.22);border-color:rgba(130,205,255,.7);}
+  100%{box-shadow:0 30px 80px -40px rgba(62,180,247,.45),inset 0 1px 0 rgba(255,255,255,.04);border-color:rgba(62,180,247,.18);}
+}
+@keyframes sweep{0%{transform:translateX(-130%);opacity:0;}15%{opacity:1;}100%{transform:translateX(130%);opacity:0;}}
+@keyframes iconIgnite{
+  0%{opacity:0;transform:scale(.5);filter:drop-shadow(0 0 0 rgba(62,180,247,0));}
+  55%{opacity:1;transform:scale(1.16);filter:drop-shadow(0 0 30px rgba(130,210,255,.98));}
+  100%{opacity:1;transform:scale(1);filter:drop-shadow(0 0 13px rgba(62,180,247,.55));}
+}
+@keyframes numIgnite{
+  0%{filter:drop-shadow(0 0 6px rgba(62,180,247,.15));transform:scale(.95);}
+  22%{filter:drop-shadow(0 0 46px rgba(150,222,255,.98));transform:scale(1.06);}
+  100%{filter:drop-shadow(0 0 26px rgba(62,180,247,.35));transform:scale(1);}
+}
+@keyframes bloom{0%{opacity:0;transform:scale(.6);}25%{opacity:.85;transform:scale(1);}100%{opacity:0;transform:scale(1.18);}}
+@keyframes formulaOn{
+  0%{border-color:rgba(62,180,247,.1);box-shadow:0 0 0 rgba(62,180,247,0);}
+  30%{border-color:rgba(140,212,255,.85);box-shadow:0 0 24px rgba(62,180,247,.42);}
+  100%{border-color:rgba(62,180,247,.22);box-shadow:0 0 0 rgba(62,180,247,0);}
+}
+
+.icon{height:48px;width:auto;align-self:start;filter:drop-shadow(0 0 13px rgba(62,180,247,.55));opacity:0;}
+.reveal.in .panel .icon{animation:iconIgnite .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--off) + .12s);}
+
+.peyebrow,.ptitle,.promise,.formula,.hero,.warline,.feats,.cta{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1);}
+.reveal.in .panel .peyebrow,.reveal.in .panel .ptitle,.reveal.in .panel .promise,.reveal.in .panel .formula,.reveal.in .panel .hero,.reveal.in .panel .warline,.reveal.in .panel .feats,.reveal.in .panel .cta{opacity:1;transform:none;}
+.reveal.in .panel .peyebrow{transition-delay:calc(var(--off) + .26s);}
+.reveal.in .panel .ptitle{transition-delay:calc(var(--off) + .32s);}
+.reveal.in .panel .promise{transition-delay:calc(var(--off) + .40s);}
+.reveal.in .panel .formula{transition-delay:calc(var(--off) + .48s);animation:formulaOn 1s ease-out;animation-delay:calc(var(--off) + .50s);}
+.reveal.in .panel .hero{transition-delay:calc(var(--off) + .56s);}
+.reveal.in .panel .warline{transition-delay:calc(var(--off) + .64s);}
+.reveal.in .panel .feats{transition-delay:calc(var(--off) + .72s);}
+.reveal.in .panel .cta{transition-delay:calc(var(--off) + .80s);}
+
+.peyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);align-self:end;}
+.ptitle{font-family:"Sora",sans-serif;font-weight:800;font-size:clamp(26px,3vw,36px);letter-spacing:-.02em;line-height:1.05;margin:0;align-self:end;}
+.ptitle sup{font-size:.36em;font-weight:700;top:-1em;color:var(--accent);}
+.promise{color:#C8D4E3;font-size:16px;line-height:1.5;margin:0;font-weight:500;align-self:start;}
+
+.formula{border:1px solid rgba(62,180,247,.22);background:linear-gradient(180deg,rgba(62,180,247,.07),rgba(62,180,247,.02));border-radius:14px;padding:16px 18px;align-self:stretch;position:relative;z-index:1;}
+.formula .eq{font-family:"JetBrains Mono",monospace;font-size:clamp(15px,1.7vw,18px);font-weight:600;color:#E4EEFA;letter-spacing:.01em;}
+.formula .op{color:var(--accent-bright);}
+.formula .up{color:#5FD0A0;}
+.formula .dn{color:#FF8FA3;}
+.formula .cap{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted2);margin-top:9px;letter-spacing:.02em;line-height:1.5;}
+
+.hero{display:flex;flex-direction:column;gap:5px;align-self:end;position:relative;z-index:1;}
+.hero::after{content:"";position:absolute;left:-6%;top:22%;width:58%;height:70%;border-radius:50%;background:radial-gradient(circle,rgba(130,210,255,.5),transparent 70%);opacity:0;pointer-events:none;filter:blur(10px);z-index:0;}
+.hero.lit::after{animation:bloom 1.2s ease-out;}
+.hero .pre{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);position:relative;z-index:1;}
+.hero .big{position:relative;z-index:1;font-family:"Sora",sans-serif;font-weight:800;font-size:clamp(58px,9vw,92px);line-height:.9;letter-spacing:-.04em;
+  background:linear-gradient(180deg,var(--accent-bright),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 26px rgba(62,180,247,.35));}
+.hero.lit .big{animation:numIgnite 1.15s ease-out;}
+.hero .hlabel{color:#AEBCCF;font-size:14px;line-height:1.45;margin-top:4px;position:relative;z-index:1;}
+
+.warline{position:relative;z-index:1;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.03);border-left:3px solid var(--accent);align-self:stretch;display:flex;align-items:center;}
+.warline span{color:#E0EAF6;font-size:15.5px;line-height:1.5;font-weight:600;}
+.warline b{color:var(--accent-bright);}
+
+.feats{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:13px;align-self:start;position:relative;z-index:1;}
+.feats li{display:flex;gap:12px;align-items:flex-start;color:#C2CEDD;font-size:15px;line-height:1.45;}
+.feats li::before{content:"";flex:0 0 auto;width:18px;height:18px;margin-top:1px;border-radius:50%;background:rgba(62,180,247,.14);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%233EB4F7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;}
+
+.cta{justify-self:start;align-self:end;display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:999px;font-family:"Sora",sans-serif;font-weight:700;font-size:15.5px;text-decoration:none;letter-spacing:.01em;transition:transform .25s ease,box-shadow .25s ease,opacity .6s ease;background:linear-gradient(180deg,#5cc3ff,#2ea2ef);color:#04121f;box-shadow:0 0 0 1px rgba(169,224,255,.4),0 14px 40px -12px rgba(62,180,247,.85);position:relative;z-index:1;}
+.cta:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(169,224,255,.6),0 20px 54px -12px rgba(62,180,247,1);}
+.cta .ar{transition:transform .25s ease;}
+.cta:hover .ar{transform:translateX(4px);}
+
+.hint{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:5;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted2);background:rgba(7,12,22,.8);padding:6px 12px;border-radius:999px;border:1px solid var(--line);}
+.replay{position:fixed;top:14px;right:16px;z-index:5;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(7,12,22,.85);padding:7px 13px;border-radius:999px;border:1px solid rgba(62,180,247,.3);cursor:pointer;}
+
+@media (max-width:860px){
+  .verticals{grid-template-columns:1fr;grid-template-rows:none;}
+  .panel{grid-row:auto;grid-column:auto;display:flex;flex-direction:column;gap:22px;padding:32px 26px 30px;--off:0s;}
+  .panel.p2{--off:.2s;}
+  .panel .icon,.panel .peyebrow,.panel .ptitle,.panel .promise,.panel .formula,.panel .hero,.panel .warline,.panel .feats,.panel .cta{align-self:auto;}
+  .panel .motif{height:250px;}
+  .fork svg{height:80px;}
+  .fork .branch-line{display:none;}
+}
+@media (prefers-reduced-motion:reduce){
+  .eyebrow,h2,.intro,.cred,.panel,.panel .icon,.peyebrow,.ptitle,.promise,.formula,.hero,.warline,.feats,.cta,.fork .lab,.fork .node,.fork .tip{opacity:1!important;transform:none!important;animation:none!important;}
+  .panel::after{display:none;}
+  .fork .ln{stroke-dashoffset:0!important;}
+}
+</style>
+</head>
+<body>
+<div class="bp"></div>
+<div class="hint">preview · scrolli per rivelare</div>
+<div class="replay" id="replay">&#8635; rivedi l'animazione</div>
+
+<div class="wrap reveal" id="sec">
+  <canvas class="neural" id="neural"></canvas>
+
+  <div class="content">
+    <div class="eyebrow">Come vuoi far crescere il tuo business?</div>
+    <h2>Più clienti. Più fatturato.<br>Un solo metodo.</h2>
+    <p class="intro">Le persone non comprano il trapano: comprano il buco. Allo stesso modo tu non vuoi campagne o lead — vuoi <b>clienti che firmano</b> e <b>fatturato che cresce</b>. È l'unica cosa su cui costruiamo. Ed è il motivo dei nostri numeri.</p>
+    <div class="cred"><span class="dot"></span>oltre 1M&euro; di adv in gestione per i nostri partner</div>
+
+    <div class="fork">
+      <span class="lab">un solo metodo</span>
+      <svg viewBox="0 0 320 118" xmlns="http://www.w3.org/2000/svg">
+        <path class="ln" d="M160 26 L160 58"/>
+        <path class="ln branch-line" d="M160 58 C160 86, 70 80, 60 108"/>
+        <path class="ln branch-line" d="M160 58 C160 86, 250 80, 260 108"/>
+        <circle class="node" cx="160" cy="22" r="9"/>
+        <circle class="tip branch-line" cx="60" cy="108" r="5"/>
+        <circle class="tip branch-line" cx="260" cy="108" r="5"/>
+      </svg>
+    </div>
+
+    <div class="verticals">
+
+      <!-- ============ Customer Generation ============ -->
+      <div class="panel p1">
+        <svg class="motif" viewBox="0 0 120 160" fill="none" stroke="#3EB4F7" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 64 L40 40 L50 50 L58 22 L66 44 L78 30 L92 64 L104 96 L84 134 L60 150 L40 132 L18 92 Z"/>
+          <path d="M58 22 L60 150" opacity=".5"/>
+          <path d="M30 64 L60 150" opacity=".4"/>
+          <path d="M92 64 L60 150" opacity=".4"/>
+          <path d="M18 92 L60 150" opacity=".3"/>
+          <path d="M104 96 L60 150" opacity=".3"/>
+          <path d="M40 40 L58 22 M78 30 L58 22" opacity=".4"/>
+          <path d="M14 64 L108 64" opacity=".85"/>
+        </svg>
+        <svg class="icon" viewBox="0 0 76 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="cgIce" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E6F9F"/><stop offset="1" stop-color="#0A1B2E"/></linearGradient></defs>
+          <circle cx="20" cy="28" r="13" stroke="#6CC6FF" stroke-width="3"/>
+          <circle cx="56" cy="28" r="13" stroke="#2E86C4" stroke-width="3"/>
+          <path d="M31 22 L34 12 L37 17 L40 9 L43 14 L44 24 L40 36 L38 46 L34 34 L31 22 Z" fill="url(#cgIce)" stroke="#5CC3FF" stroke-width="1.3" stroke-linejoin="round"/>
+          <path d="M40 9 L38 46" stroke="#A9E0FF" stroke-width="1" opacity=".6"/>
+          <path d="M31 22 L38 46" stroke="#A9E0FF" stroke-width="1" opacity=".4"/>
+        </svg>
+        <div class="peyebrow">Vendi servizi, consulenze, B2B?</div>
+        <h3 class="ptitle">Customer Generation<sup>&trade;</sup></h3>
+        <p class="promise">Non ti riempiamo il CRM di nomi. Ti riempiamo l'agenda di clienti.</p>
+
+        <div class="formula">
+          <div class="eq">CAC <span class="op">=</span> CPL <span class="op">&divide;</span> LCR</div>
+          <div class="cap">LCR = Lead-to-Customer Rate &middot; es. 10&euro;/lead, 1 su 20 &rarr; CAC 200&euro;</div>
+        </div>
+
+        <div class="hero">
+          <span class="pre">il numero che conta</span>
+          <span class="big"><span class="count" data-to="18" data-prefix="&minus;" data-suffix="%" data-countdelay="700">0</span></span>
+          <span class="hlabel">sul CAC, il costo per acquisire un cliente vero.</span>
+        </div>
+
+        <div class="warline"><span>Tutti ti vendono <b>lead a 0,90&euro;</b>. Noi lavoriamo l'unico numero che paga lo stipendio: il <b>CAC</b>.</span></div>
+
+        <ul class="feats">
+          <li>Zero liste di nomi da rincorrere.</li>
+          <li>Solo persone pronte a firmare.</li>
+        </ul>
+
+        <a class="cta" href="#" onclick="return false;">Voglio clienti, non lead <span class="ar">&#8594;</span></a>
+      </div>
+
+      <!-- ============ Revenue Generation ============ -->
+      <div class="panel p2">
+        <svg class="motif" viewBox="0 0 120 160" fill="none" stroke="#3EB4F7" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 64 L40 40 L50 50 L58 22 L66 44 L78 30 L92 64 L104 96 L84 134 L60 150 L40 132 L18 92 Z"/>
+          <path d="M58 22 L60 150" opacity=".5"/>
+          <path d="M30 64 L60 150" opacity=".4"/>
+          <path d="M92 64 L60 150" opacity=".4"/>
+          <path d="M18 92 L60 150" opacity=".3"/>
+          <path d="M104 96 L60 150" opacity=".3"/>
+          <path d="M40 40 L58 22 M78 30 L58 22" opacity=".4"/>
+          <path d="M14 64 L108 64" opacity=".85"/>
+        </svg>
+        <svg class="icon" viewBox="0 0 58 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="rgAbove" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AA6DE"/><stop offset="1" stop-color="#2E6F9F"/></linearGradient>
+            <linearGradient id="rgBelow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16456B"/><stop offset="1" stop-color="#07182B"/></linearGradient>
+          </defs>
+          <path d="M20 26 L24 12 L28 18 L31 6 L36 16 L40 26 Z" fill="url(#rgAbove)"/>
+          <path d="M20 26 L40 26 L48 42 L40 55 L28 59 L16 53 L9 38 Z" fill="url(#rgBelow)"/>
+          <path d="M20 26 L24 12 L28 18 L31 6 L36 16 L40 26 L48 42 L40 55 L28 59 L16 53 L9 38 Z" stroke="#5CC3FF" stroke-width="1.1"/>
+          <path d="M31 6 L28 59" stroke="#CFEBFF" stroke-width="1" opacity=".5"/>
+          <path d="M20 26 L28 59 M40 26 L28 59" stroke="#A9E0FF" stroke-width="1" opacity=".35"/>
+          <path d="M9 38 L28 59 M48 42 L28 59" stroke="#A9E0FF" stroke-width="1" opacity=".28"/>
+          <path d="M8 26 L48 26" stroke="#6CC6FF" stroke-width="4" opacity=".15"/>
+          <path d="M8 26 L48 26" stroke="#6CC6FF" stroke-width="1.6"/>
+        </svg>
+        <div class="peyebrow">Hai un ecommerce e vuoi scalare?</div>
+        <h3 class="ptitle">Revenue Generation<sup>&trade;</sup></h3>
+        <p class="promise">Non ti serve più traffico. Ti serve più fatturato dallo stesso traffico.</p>
+
+        <div class="formula">
+          <div class="eq"><span class="up">&uarr;</span>CR <span class="op">&middot;</span> <span class="up">&uarr;</span>AOV <span class="op">&middot;</span> <span class="up">&uarr;</span>LTV <span class="op">&middot;</span> <span class="dn">&darr;</span>CAC</div>
+          <div class="cap">Tre leve su. Una giù. La scala è tutta qui.</div>
+        </div>
+
+        <div class="hero">
+          <span class="pre">generato con i partner</span>
+          <span class="big">oltre <span class="count" data-to="5" data-suffix="M&euro;" data-countdelay="1050">0</span></span>
+          <span class="hlabel">di fatturato ecommerce generato per i nostri partner.</span>
+        </div>
+
+        <div class="warline"><span>Non alziamo la spesa sperando. <b>Riscriviamo l'equazione</b> che fa scalare i numeri.</span></div>
+
+        <ul class="feats">
+          <li>ROAS, AOV, LTV e retention sotto controllo.</li>
+          <li>Una struttura che regge la crescita, non un colpo di fortuna.</li>
+        </ul>
+
+        <a class="cta" href="#" onclick="return false;">Voglio scalare davvero <span class="ar">&#8594;</span></a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== neural network background (with reveal surge) ===== */
+(function(){
+  var sec=document.getElementById('sec');
+  var c=document.getElementById('neural');
+  if(!c||!sec) return;
+  var ctx=c.getContext('2d');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DPR=Math.min(window.devicePixelRatio||1,2);
+  var W=0,H=0,nodes=[],pulses=[],lastSpawn=0,surgeUntil=0;
+  var DMAX=165;
+  document.addEventListener('oonee:reveal',function(){surgeUntil=performance.now()+1800;});
+  function size(){
+    W=sec.clientWidth;H=sec.clientHeight;
+    c.width=Math.round(W*DPR);c.height=Math.round(H*DPR);
+    c.style.width=W+'px';c.style.height=H+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    build();
+    if(reduce) drawStatic();
+  }
+  function build(){
+    var count=Math.round(W*H/42000);count=Math.max(16,Math.min(count,46));
+    nodes=[];
+    for(var i=0;i<count;i++){
+      nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.17,vy:(Math.random()-.5)*.17});
+    }
+    pulses=[];
+  }
+  function nearest(i){
+    var best=-1,bd=DMAX*DMAX;
+    for(var j=0;j<nodes.length;j++){if(j===i)continue;
+      var dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=dx*dx+dy*dy;
+      if(d<bd){bd=d;best=j;}}
+    return best;
+  }
+  function drawLinks(boost){
+    var i,j,n,m,dx,dy,d,a;
+    for(i=0;i<nodes.length;i++){
+      for(j=i+1;j<nodes.length;j++){
+        n=nodes[i];m=nodes[j];dx=n.x-m.x;dy=n.y-m.y;d=Math.sqrt(dx*dx+dy*dy);
+        if(d<DMAX){a=(1-d/DMAX)*(boost?0.34:0.16);
+          ctx.strokeStyle='rgba(62,180,247,'+a+')';ctx.lineWidth=1;
+          ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(m.x,m.y);ctx.stroke();}
+      }
+    }
+    for(i=0;i<nodes.length;i++){
+      n=nodes[i];ctx.beginPath();ctx.fillStyle='rgba(169,224,255,'+(boost?0.9:0.55)+')';ctx.arc(n.x,n.y,boost?2:1.6,0,6.2832);ctx.fill();
+    }
+  }
+  function drawStatic(){ctx.clearRect(0,0,W,H);drawLinks(false);}
+  function frame(t){
+    ctx.clearRect(0,0,W,H);
+    var surging=t<surgeUntil;
+    var i,n;
+    for(i=0;i<nodes.length;i++){n=nodes[i];n.x+=n.vx;n.y+=n.vy;
+      if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;}
+    drawLinks(surging);
+    var interval=surging?170:850, cap=surging?16:7;
+    if(t-lastSpawn>interval&&pulses.length<cap){lastSpawn=t;
+      var a0=Math.floor(Math.random()*nodes.length),b0=nearest(a0);
+      if(b0>=0)pulses.push({a:a0,b:b0,t:0});}
+    ctx.globalCompositeOperation='lighter';
+    for(i=pulses.length-1;i>=0;i--){var p=pulses[i];p.t+=0.017;
+      if(p.t>=1){pulses.splice(i,1);continue;}
+      var A=nodes[p.a],B=nodes[p.b];if(!A||!B){pulses.splice(i,1);continue;}
+      var x=A.x+(B.x-A.x)*p.t,y=A.y+(B.y-A.y)*p.t;
+      var r=surging?9:7;
+      var g=ctx.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,'rgba(169,224,255,'+(surging?1:0.9)+')');g.addColorStop(1,'rgba(62,180,247,0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,6.2832);ctx.fill();}
+    ctx.globalCompositeOperation='source-over';
+    requestAnimationFrame(frame);
+  }
+  size();
+  setTimeout(size,350);
+  window.addEventListener('resize',size);
+  if(!reduce)requestAnimationFrame(frame);
+})();
+
+/* ===== reveal + count-up ignition ===== */
+(function(){
+  var sec=document.getElementById('sec');
+  function runCount(){
+    [].forEach.call(document.querySelectorAll('.count'),function(el){
+      var to=parseFloat(el.getAttribute('data-to'))||0;
+      var pre=el.getAttribute('data-prefix')||'';
+      var suf=el.getAttribute('data-suffix')||'';
+      var delay=parseInt(el.getAttribute('data-countdelay')||'0',10);
+      el.textContent=pre+'0'+suf;
+      setTimeout(function(){
+        var hero=el.closest('.hero'); if(hero){hero.classList.remove('lit');void hero.offsetWidth;hero.classList.add('lit');}
+        var dur=1100,start=null;
+        function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1);
+          var eased=1-Math.pow(1-p,3);el.textContent=pre+Math.round(to*eased)+suf;
+          if(p<1)requestAnimationFrame(step);else el.textContent=pre+to+suf;}
+        requestAnimationFrame(step);
+      },delay);
+    });
+  }
+  function fire(){
+    sec.classList.add('in');
+    document.dispatchEvent(new CustomEvent('oonee:reveal'));
+    runCount();
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){fire();io.unobserve(sec);}});
+    },{threshold:.25});
+    io.observe(sec);
+  }else{fire();}
+
+  /* replay button (preview only) */
+  var rb=document.getElementById('replay');
+  if(rb)rb.addEventListener('click',function(){
+    sec.classList.remove('in');void sec.offsetWidth;
+    setTimeout(fire,60);
+  });
+})();
+</script>
+</body>
+</html>
