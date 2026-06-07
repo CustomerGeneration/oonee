@@ -361,7 +361,12 @@ export default function ConversionArchitecture() {
             distanza.
           </motion.p>
           <motion.div variants={enableAnim ? finaleItem : undefined}>
-            <a className={styles.cta} href="#">
+            <a
+              className={styles.cta}
+              href="https://www.oonee.it"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Inizia da qui
               <span className={styles.ctaAr} aria-hidden>
                 →
