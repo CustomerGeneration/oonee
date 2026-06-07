@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>oonee — Rassegna stampa (preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{ --bg:#0A1018; --ink:#EAF1FB; --muted:#8A99AE; --accent:#3EB4F7; }
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:"Manrope",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding:7vh 0;}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px;}
+.hint{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:22px;}
+h2{font-family:"Sora",sans-serif;font-weight:800;font-size:clamp(30px,5vw,52px);letter-spacing:-.02em;line-height:1.05;margin:0;}
+.sub{color:var(--muted);font-size:clamp(15px,1.6vw,18px);line-height:1.6;margin:18px 0 0;max-width:540px;}
+
+/* seamless infinite marquee */
+.marquee{margin-top:54px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);}
+.track{display:flex;gap:22px;width:max-content;animation:marquee 46s linear infinite;will-change:transform;}
+.marquee:hover .track{animation-play-state:paused;}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* logo chip: uniform height, centered, whole chip clickable */
+.chip{flex:0 0 auto;height:96px;min-width:188px;padding:0 30px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;text-decoration:none;position:relative;transition:transform .3s ease,box-shadow .3s ease;}
+.chip:hover{transform:translateY(-4px);box-shadow:0 18px 42px -16px rgba(0,0,0,.55);}
+.chip .wm{font-family:Georgia,"Times New Roman",serif;color:#16181d;text-align:center;line-height:1.04;white-space:nowrap;}
+.chip .ext{position:absolute;top:9px;right:11px;opacity:0;transition:opacity .3s ease;color:#2E9BEF;font-size:14px;font-family:"Manrope",sans-serif;}
+.chip:hover .ext{opacity:1;}
+
+@media (prefers-reduced-motion:reduce){ .track{animation:none;} .marquee{overflow-x:auto;} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <span class="hint">preview · striscia loghi, loop continuo, pausa all'hover</span>
+  <h2>Quello che facciamo ha avuto eco.</h2>
+  <p class="sub">La nostra visione sull'iper-personalizzazione e sulla Conversion Architecture è stata raccontata da:</p>
+</div>
+
+<div class="marquee">
+  <div class="track" id="track">
+    <!-- SET 1 -->
+    <a class="chip" href="#" onclick="return false;"><span class="ext">&#8599;</span><span class="wm" style="font-weight:700;font-size:22px;letter-spacing:.04em;line-height:1;">FORTUNE<br><span style="font-weight:400;font-size:13px;letter-spacing:.24em;">ITALIA</span></span></a>
+    <a class="chip" href="#" onclick="return false;"><span class="ext">&#8599;</span><span class="wm" style="font-weight:800;font-size:30px;letter-spacing:-.01em;">Economy</span></a>
+    <a class="chip" href="#" onclick="return false;"><span class="ext">&#8599;</span><span class="wm" style="font-size:17px;letter-spacing:.02em;line-height:1.05;">CRONACHE<br><b>DI MILANO</b></span></a>
+    <a class="chip" href="#" onclick="return false;"><span class="ext">&#8599;</span><span class="wm" style="font-size:18px;letter-spacing:.01em;">Corriere di Palermo</span></a>
+    <a class="chip" href="#" onclick="return false;"><span class="ext">&#8599;</span><span class="wm" style="font-size:17px;letter-spacing:.01em;">il Corriere di Firenze</span></a>
+    <a class="chip" href="#" onclick="return false;"><span class="ext">&#8599;</span><span class="wm" style="font-weight:700;font-size:16px;letter-spacing:.06em;">LA CITTÀ DI ROMA</span></a>
+    <a class="chip" href="#" onclick="return false;"><span class="ext">&#8599;</span><span class="wm" style="font-size:18px;letter-spacing:.01em;">Corriere di Ancona</span></a>
+    <a class="chip" href="#" onclick="return false;"><span class="ext">&#8599;</span><span class="wm" style="font-size:16px;letter-spacing:.01em;">Corriere della Sardegna</span></a>
+    <a class="chip" href="#" onclick="return false;"><span class="ext">&#8599;</span><span class="wm" style="font-family:'Sora',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.01em;">Primo Piano 24</span></a>
+    <a class="chip" href="#" onclick="return false;"><span class="ext">&#8599;</span><span class="wm" style="font-weight:800;font-size:19px;letter-spacing:.02em;">CANALE UNO</span></a>
+    <a class="chip" href="#" onclick="return false;"><span class="ext">&#8599;</span><span class="wm" style="font-size:16px;letter-spacing:.01em;">Cronache della Calabria</span></a>
+    <a class="chip" href="#" onclick="return false;"><span class="ext">&#8599;</span><span class="wm" style="font-weight:700;font-size:21px;">Notiziedì</span></a>
+
+    <!-- SET 2 (duplicato per il loop) -->
+    <a class="chip" href="#" onclick="return false;" tabindex="-1" aria-hidden="true"><span class="ext">&#8599;</span><span class="wm" style="font-weight:700;font-size:22px;letter-spacing:.04em;line-height:1;">FORTUNE<br><span style="font-weight:400;font-size:13px;letter-spacing:.24em;">ITALIA</span></span></a>
+    <a class="chip" href="#" onclick="return false;" tabindex="-1" aria-hidden="true"><span class="ext">&#8599;</span><span class="wm" style="font-weight:800;font-size:30px;letter-spacing:-.01em;">Economy</span></a>
+    <a class="chip" href="#" onclick="return false;" tabindex="-1" aria-hidden="true"><span class="ext">&#8599;</span><span class="wm" style="font-size:17px;letter-spacing:.02em;line-height:1.05;">CRONACHE<br><b>DI MILANO</b></span></a>
+    <a class="chip" href="#" onclick="return false;" tabindex="-1" aria-hidden="true"><span class="ext">&#8599;</span><span class="wm" style="font-size:18px;letter-spacing:.01em;">Corriere di Palermo</span></a>
+    <a class="chip" href="#" onclick="return false;" tabindex="-1" aria-hidden="true"><span class="ext">&#8599;</span><span class="wm" style="font-size:17px;letter-spacing:.01em;">il Corriere di Firenze</span></a>
+    <a class="chip" href="#" onclick="return false;" tabindex="-1" aria-hidden="true"><span class="ext">&#8599;</span><span class="wm" style="font-weight:700;font-size:16px;letter-spacing:.06em;">LA CITTÀ DI ROMA</span></a>
+    <a class="chip" href="#" onclick="return false;" tabindex="-1" aria-hidden="true"><span class="ext">&#8599;</span><span class="wm" style="font-size:18px;letter-spacing:.01em;">Corriere di Ancona</span></a>
+    <a class="chip" href="#" onclick="return false;" tabindex="-1" aria-hidden="true"><span class="ext">&#8599;</span><span class="wm" style="font-size:16px;letter-spacing:.01em;">Corriere della Sardegna</span></a>
+    <a class="chip" href="#" onclick="return false;" tabindex="-1" aria-hidden="true"><span class="ext">&#8599;</span><span class="wm" style="font-family:'Sora',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.01em;">Primo Piano 24</span></a>
+    <a class="chip" href="#" onclick="return false;" tabindex="-1" aria-hidden="true"><span class="ext">&#8599;</span><span class="wm" style="font-weight:800;font-size:19px;letter-spacing:.02em;">CANALE UNO</span></a>
+    <a class="chip" href="#" onclick="return false;" tabindex="-1" aria-hidden="true"><span class="ext">&#8599;</span><span class="wm" style="font-size:16px;letter-spacing:.01em;">Cronache della Calabria</span></a>
+    <a class="chip" href="#" onclick="return false;" tabindex="-1" aria-hidden="true"><span class="ext">&#8599;</span><span class="wm" style="font-weight:700;font-size:21px;">Notiziedì</span></a>
+  </div>
+</div>
+
+</body>
+</html>
