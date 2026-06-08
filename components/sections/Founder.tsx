@@ -9,6 +9,7 @@ export default function Founder() {
   const portraitRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
+  const neuralRef = useRef<HTMLCanvasElement>(null);
   const [inView, setInView] = useState(false);
 
   const prefersReduced = useReducedMotion();
@@ -205,6 +206,148 @@ export default function Founder() {
     };
   }, []);
 
+  // rete neurale dietro al testo (~30 nodi, linee per vicinanza, 3 impulsi)
+  useEffect(() => {
+    const nc = neuralRef.current;
+    if (!nc) return;
+    const nx = nc.getContext("2d");
+    if (!nx) return;
+
+    const reduce = reduceRef.current;
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const N = 30;
+
+    type Node = { x: number; y: number; vx: number; vy: number };
+    type Pulse = { a: number; b: number; t: number; sp: number };
+    let NW = 0;
+    let NH = 0;
+    let LINK = 0;
+    let nodes: Node[] = [];
+    let pulses: Pulse[] = [];
+    let raf = 0;
+
+    const ri = (n: number) => Math.floor(Math.random() * n);
+    const npulse = (): Pulse => {
+      const a = ri(N);
+      let b = ri(N);
+      let g = 0;
+      while (b === a && g < 5) {
+        b = ri(N);
+        g++;
+      }
+      return { a, b, t: Math.random(), sp: 0.004 + Math.random() * 0.006 };
+    };
+    const nsize = () => {
+      NW = nc.clientWidth;
+      NH = nc.clientHeight;
+      nc.width = Math.round(NW * DPR);
+      nc.height = Math.round(NH * DPR);
+      LINK = Math.min(NW, NH) * 0.46;
+    };
+    const nbuild = () => {
+      nodes = [];
+      for (let i = 0; i < N; i++) {
+        nodes.push({
+          x: Math.random() * NW,
+          y: Math.random() * NH,
+          vx: (Math.random() - 0.5) * 0.16,
+          vy: (Math.random() - 0.5) * 0.16,
+        });
+      }
+      pulses = [];
+      for (let k = 0; k < 3; k++) pulses.push(npulse());
+    };
+    const drawLinksNodes = () => {
+      for (let i = 0; i < N; i++) {
+        for (let j = i + 1; j < N; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < LINK) {
+            nx.strokeStyle = `rgba(62,180,247,${(1 - d / LINK) * 0.15})`;
+            nx.lineWidth = 1;
+            nx.beginPath();
+            nx.moveTo(nodes[i].x, nodes[i].y);
+            nx.lineTo(nodes[j].x, nodes[j].y);
+            nx.stroke();
+          }
+        }
+      }
+      for (let i = 0; i < N; i++) {
+        nx.fillStyle = "rgba(125,195,240,0.5)";
+        nx.beginPath();
+        nx.arc(nodes[i].x, nodes[i].y, 1.4, 0, 6.2832);
+        nx.fill();
+      }
+    };
+    const nstep = () => {
+      nx.clearRect(0, 0, nc.width, nc.height);
+      nx.save();
+      nx.scale(DPR, DPR);
+      for (let i = 0; i < N; i++) {
+        const n = nodes[i];
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0) n.x += NW;
+        if (n.x > NW) n.x -= NW;
+        if (n.y < 0) n.y += NH;
+        if (n.y > NH) n.y -= NH;
+      }
+      drawLinksNodes();
+      for (let k = 0; k < pulses.length; k++) {
+        const pu = pulses[k];
+        pu.t += pu.sp;
+        if (pu.t >= 1) {
+          pulses[k] = npulse();
+          continue;
+        }
+        const a = nodes[pu.a];
+        const b = nodes[pu.b];
+        const e = pu.t * pu.t * (3 - 2 * pu.t);
+        const px = a.x + (b.x - a.x) * e;
+        const py = a.y + (b.y - a.y) * e;
+        const gr = nx.createRadialGradient(px, py, 0, px, py, 6);
+        gr.addColorStop(0, "rgba(169,224,255,0.9)");
+        gr.addColorStop(1, "rgba(169,224,255,0)");
+        nx.fillStyle = gr;
+        nx.beginPath();
+        nx.arc(px, py, 6, 0, 6.2832);
+        nx.fill();
+        nx.fillStyle = "rgba(220,240,255,0.95)";
+        nx.beginPath();
+        nx.arc(px, py, 1.8, 0, 6.2832);
+        nx.fill();
+      }
+      nx.restore();
+      raf = requestAnimationFrame(nstep);
+    };
+
+    if (reduce) {
+      // prefers-reduced-motion: un singolo frame statico (nodi + linee)
+      nsize();
+      nbuild();
+      nx.clearRect(0, 0, nc.width, nc.height);
+      nx.save();
+      nx.scale(DPR, DPR);
+      drawLinksNodes();
+      nx.restore();
+      return;
+    }
+
+    nsize();
+    nbuild();
+    raf = requestAnimationFrame(nstep);
+    const onResize = () => {
+      nsize();
+      nbuild();
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
   return (
     <section id="founder" className={styles.section}>
       <div className={styles.bp} aria-hidden />
@@ -219,31 +362,36 @@ export default function Founder() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             ref={imgRef}
-            src="/nico-maiolini.png"
+            src="/nico-founder.png"
             alt="Angelo Nico Maiolini"
             className={styles.photo}
           />
         </div>
 
-        <div className={styles.aboutText}>
-          <p className={styles.name}>Angelo Nico Maiolini</p>
-          <div className={styles.role}>
-            <b>Founder di oonee</b> · Marchio Customer Generation® registrato ·
-            Citato da Fortune Italia ed Economy Magazine
-          </div>
+        <div className={styles.lower}>
+          <canvas ref={neuralRef} className={styles.neural} aria-hidden />
+          <div className={styles.aboutText}>
+            <p className={styles.name}>Angelo Nico Maiolini</p>
+            <div className={styles.role}>
+              <b>Founder di oonee</b> · Marchio Customer Generation® registrato ·
+              Citato da Fortune Italia ed Economy Magazine
+            </div>
 
-          <div className={styles.manifesto}>
-            <p>Nessuno guarda più la pubblicità: ci nuota dentro e la ignora.</p>
-            <p>Chi parla a tutti non vende a nessuno.</p>
-            <p>
-              Vendere significa parlare al singolo, su scala. Questa è la{" "}
-              <span className={styles.cy}>Conversion Architecture</span>.
-            </p>
-          </div>
+            <div className={styles.manifesto}>
+              <p>
+                Nessuno guarda più la pubblicità: ci nuota dentro e la ignora.
+              </p>
+              <p>Chi parla a tutti non vende a nessuno.</p>
+              <p>
+                Vendere significa parlare al singolo, su scala. Questa è la{" "}
+                <span className={styles.cy}>Conversion Architecture</span>.
+              </p>
+            </div>
 
-          <div className={styles.tagline}>
-            Non facciamo marketing.{" "}
-            <span className={styles.cy}>Costruiamo conversione.</span>
+            <div className={styles.tagline}>
+              Non facciamo marketing.{" "}
+              <span className={styles.cy}>Costruiamo conversione.</span>
+            </div>
           </div>
         </div>
       </div>

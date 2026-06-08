@@ -112,7 +112,18 @@
       "Bash(curl -s -o /dev/null -w \"nico-maiolini.png %{http_code} \\(%{content_type}\\)\\\\n\" \"https://www.oonee.it/nico-maiolini.png\")",
       "Bash(python3 -c \"print\\('aspect 1313/1279 =', round\\(1313/1279,4\\)\\)\")",
       "Bash(grep -oE \"src=\\\\\"[^\\\\\"]{0,60}\" design-assets/oonee-chidietro-preview.html)",
-      "Bash(awk NR>=10 && NR<=49 { if \\(length\\($0\\) > 2000\\) print NR\": <<BASE64>>\"; else print NR\": \"$0 } *)"
+      "Bash(awk NR>=10 && NR<=49 { if \\(length\\($0\\) > 2000\\) print NR\": <<BASE64>>\"; else print NR\": \"$0 } *)",
+      "Bash(curl -s \"https://www.oonee.it/nico-maiolini.png\" -o /tmp/nm.png -w \"status %{http_code} \\(%{content_type}, %{size_download} bytes\\)\\\\n\")",
+      "Bash(sips -g pixelWidth -g pixelHeight /tmp/nm.png)",
+      "Bash(shasum -a 256 public/nico-maiolini.png)",
+      "Bash(shasum -a 256)",
+      "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha public/nico-founder.png)",
+      "Bash(shasum -a 256 public/nico-founder.png)",
+      "Bash(echo \"hash: $\\(shasum -a 256 public/nico-founder.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha design-assets/nico-founder.png)",
+      "Bash(echo \"hash disco:  $\\(shasum -a 256 public/nico-founder.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight design-assets/nico-founder.png)",
+      "Bash(echo \"copiata in public/ \\(hash: $\\(shasum -a 256 public/nico-founder.png)"
     ]
   }
 }
