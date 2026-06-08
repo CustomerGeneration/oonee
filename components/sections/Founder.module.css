@@ -1,0 +1,207 @@
+/* ============================================================
+   Sezione "Chi c'è dietro oonee" — la visione del founder
+   Replica di design-assets/oonee-chidietro-preview.html
+   (step 1: struttura + testo + foto statica; niente canvas/pixel)
+   (font allineati al sito: Inter + stack monospace di sistema)
+   ============================================================ */
+
+.section {
+  --accent: #3eb4f7;
+  --accent-bright: #a9e0ff;
+  --muted: #8a99ae;
+  --muted2: #5a6a82;
+  --mono: ui-monospace, SFMono-Regular, Menlo, "JetBrains Mono", monospace;
+
+  position: relative;
+  overflow: hidden;
+  background: #070c16;
+  color: #eaf1fb;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* griglia blueprint tenue, sfumata in radiale */
+.bp {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(62, 180, 247, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(62, 180, 247, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(130% 70% at 50% 38%, #000, transparent 75%);
+  mask-image: radial-gradient(130% 70% at 50% 38%, #000, transparent 75%);
+  opacity: 0.4;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 96px 28px 14vh;
+}
+
+.eyebrow {
+  display: block;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+.eyebrow::after {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.6;
+  margin: 14px auto 0;
+}
+
+/* ===== ritratto ===== */
+.portrait {
+  position: relative;
+  width: min(440px, 84vw);
+  margin: 0 auto;
+  aspect-ratio: 1028 / 1356;
+}
+.glow {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  width: 160%;
+  height: 150%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 54% 38%,
+    rgba(62, 180, 247, 0.4),
+    rgba(62, 180, 247, 0.1) 42%,
+    transparent 70%
+  );
+  filter: blur(12px);
+}
+/* canvas dell'effetto pixel, sotto la foto nitida */
+.pcanvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 2;
+}
+
+/* ===== blocco testo ===== */
+.aboutText {
+  max-width: 600px;
+  margin: 26px auto 0;
+  text-align: left;
+}
+.name {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 800;
+  font-size: clamp(24px, 3.4vw, 34px);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.role {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: var(--muted2);
+  margin-top: 11px;
+  line-height: 1.7;
+}
+.role b {
+  color: #9fb2c8;
+  font-weight: 600;
+}
+.manifesto {
+  margin-top: 28px;
+  border-left: 2px solid rgba(62, 180, 247, 0.55);
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.manifesto p {
+  margin: 0;
+  color: #c6d3e2;
+  font-size: clamp(17px, 2.1vw, 21px);
+  line-height: 1.5;
+  font-weight: 500;
+}
+.cy {
+  color: var(--accent-bright);
+}
+.tagline {
+  margin-top: 30px;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 800;
+  font-size: clamp(23px, 3.4vw, 38px);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+}
+
+/* ===== reveal scaglionato ===== */
+.eyebrow,
+.aboutText > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.glow {
+  opacity: 0;
+  transition: opacity 1.1s ease;
+}
+.in .eyebrow {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.05s;
+}
+.in .glow {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+.in .name {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.15s;
+}
+.in .role {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.26s;
+}
+.in .manifesto {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.38s;
+}
+.in .tagline {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.52s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow,
+  .aboutText > *,
+  .glow {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
