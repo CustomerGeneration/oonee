@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>oonee — studioos (preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070C16;
+  --ink:#EAF1FB; --muted:#8A99AE; --muted2:#5A6A82;
+  --accent:#3EB4F7; --accent-bright:#A9E0FF;
+  --rec:#FF6B7A;
+  --line:rgba(255,255,255,.07);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:"Manrope",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding:9vh 0 13vh;}
+.bp{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(62,180,247,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(62,180,247,.04) 1px,transparent 1px);
+  background-size:48px 48px;-webkit-mask-image:radial-gradient(130% 70% at 50% 18%,#000,transparent 75%);mask-image:radial-gradient(130% 70% at 50% 18%,#000,transparent 75%);opacity:.5;}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 28px;}
+
+/* ===== editing console card ===== */
+.console{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(62,180,247,.18);
+  background:radial-gradient(130% 80% at 50% -10%,rgba(62,180,247,.10),transparent 55%),#0A0F1A;
+  box-shadow:0 40px 110px -50px rgba(62,180,247,.5),inset 0 1px 0 rgba(255,255,255,.04);
+  opacity:0;transform:scale(.99);transition:opacity .7s ease,transform .5s ease;}
+.console.in{opacity:1;transform:none;animation:consoleIgnite 1.3s ease-out;}
+@keyframes consoleIgnite{
+  0%{box-shadow:0 20px 60px -45px rgba(62,180,247,.15);border-color:rgba(62,180,247,.08);}
+  35%{box-shadow:0 50px 130px -30px rgba(62,180,247,.95),inset 0 0 40px rgba(62,180,247,.2);border-color:rgba(130,205,255,.6);}
+  100%{box-shadow:0 40px 110px -50px rgba(62,180,247,.5),inset 0 1px 0 rgba(255,255,255,.04);border-color:rgba(62,180,247,.18);}
+}
+/* sweeping scanline (cinematic) */
+.scan{position:absolute;left:0;right:0;top:0;height:2px;z-index:6;pointer-events:none;opacity:0;
+  background:linear-gradient(90deg,transparent,rgba(130,205,255,.55),transparent);
+  animation:scan 6.5s linear infinite;animation-play-state:paused;}
+.console.in .scan{animation-play-state:running;}
+@keyframes scan{0%{top:0;opacity:0;}8%{opacity:.7;}92%{opacity:.7;}100%{top:100%;opacity:0;}}
+/* faint iceberg watermark (brand thread) */
+.berg{position:absolute;top:-20px;right:-22px;height:220px;opacity:.07;pointer-events:none;z-index:0;}
+
+/* editor top bar */
+.topbar{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:13px 18px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.015);
+  font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;}
+.tb-left{display:flex;align-items:center;gap:14px;color:var(--muted);}
+.rec{display:inline-flex;align-items:center;gap:7px;color:var(--rec);font-weight:700;}
+.rec .d{width:8px;height:8px;border-radius:50%;background:var(--rec);box-shadow:0 0 9px 1px var(--rec);animation:blink 1.4s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
+.tb-left .nm{color:#C8D6E8;letter-spacing:.18em;}
+.tc{color:var(--accent-bright);}
+.soldout{display:inline-flex;align-items:center;gap:8px;color:var(--rec);font-weight:700;border:1px solid rgba(255,107,122,.45);background:rgba(255,107,122,.08);border-radius:999px;padding:6px 13px;letter-spacing:.14em;}
+.soldout .d{width:7px;height:7px;border-radius:50%;background:var(--rec);box-shadow:0 0 8px 1px var(--rec);}
+
+/* body */
+.body{position:relative;z-index:2;padding:46px 40px 36px;text-align:center;}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;}
+
+.emblem{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:26px;}
+.emblem svg{height:68px;width:auto;filter:drop-shadow(0 0 18px rgba(62,180,247,.55));}
+.emblem .wm{font-family:"Sora",sans-serif;font-weight:800;font-size:26px;letter-spacing:-.01em;color:#EAF1FB;text-shadow:0 0 22px rgba(62,180,247,.4);}
+
+h2{font-family:"Sora",sans-serif;font-weight:800;font-size:clamp(30px,5vw,54px);letter-spacing:-.025em;line-height:1.04;margin:0 auto;max-width:14ch;}
+h2 .g{color:var(--muted2);}
+.sub{color:var(--muted);font-size:clamp(15px,1.7vw,18px);line-height:1.6;margin:22px auto 0;max-width:560px;}
+.sub b{color:#C8D4E3;font-weight:600;}
+
+.punch{text-align:center;border-top:1px solid rgba(62,180,247,.22);border-bottom:1px solid rgba(62,180,247,.22);
+  padding:15px 0;color:var(--accent-bright);font-family:"Sora",sans-serif;font-weight:700;font-size:clamp(16px,2.1vw,21px);
+  max-width:540px;margin:30px auto 0;}
+
+.scarcity{margin:30px auto 0;max-width:560px;}
+.seats{display:flex;justify-content:center;gap:9px;margin-bottom:14px;}
+.seat{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,107,122,.12);border:1px solid rgba(255,107,122,.4);}
+.seat svg{width:13px;height:13px;stroke:var(--rec);}
+.seat.pulse{animation:seatpulse 2.2s ease-in-out infinite;}
+@keyframes seatpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,122,0);}50%{box-shadow:0 0 12px 1px rgba(255,107,122,.5);}}
+.scarcity p{color:var(--muted);font-size:14.5px;line-height:1.55;margin:0;}
+.scarcity p b{color:#C8D4E3;}
+
+.cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:16px 32px;border-radius:999px;
+  font-family:"Sora",sans-serif;font-weight:700;font-size:15.5px;text-decoration:none;letter-spacing:.01em;
+  background:linear-gradient(180deg,#5cc3ff,#2ea2ef);color:#04121f;
+  box-shadow:0 0 0 1px rgba(169,224,255,.4),0 14px 40px -12px rgba(62,180,247,.85);transition:transform .25s ease,box-shadow .25s ease;}
+.cta:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(169,224,255,.6),0 20px 54px -12px rgba(62,180,247,1);}
+.cta .ar{transition:transform .25s ease;}.cta:hover .ar{transform:translateX(4px);}
+
+/* ===== editing timeline ===== */
+.timeline{position:relative;z-index:2;padding:12px 16px 16px;border-top:1px solid rgba(255,255,255,.07);background:rgba(0,0,0,.28);}
+.tl-ruler{height:16px;position:relative;margin-bottom:8px;
+  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 18px);
+  background-position:left bottom;background-size:100% 7px;background-repeat:repeat-x;border-bottom:1px solid rgba(255,255,255,.05);}
+.tl-ruler span{position:absolute;bottom:1px;font-family:"JetBrains Mono",monospace;font-size:8.5px;color:var(--muted2);letter-spacing:.05em;}
+.tl-row{position:relative;height:38px;margin-bottom:6px;}
+.tl-row.audio{height:30px;margin-bottom:0;}
+.tl-tag{position:absolute;left:0;top:0;z-index:3;font-family:"JetBrains Mono",monospace;font-size:8px;letter-spacing:.14em;color:var(--muted2);background:rgba(10,15,26,.7);padding:2px 5px;border-radius:4px;}
+.tl-track{position:absolute;inset:0;display:flex;gap:6px;align-items:center;}
+.clip{height:80%;border-radius:7px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  font-family:"JetBrains Mono",monospace;font-weight:700;font-size:9px;letter-spacing:.12em;color:#E4F2FF;text-transform:uppercase;
+  background:linear-gradient(135deg,rgba(62,180,247,.45),rgba(18,52,86,.7));border:1px solid rgba(120,200,255,.4);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12);}
+.clip.c1{flex:2;} .clip.c2{flex:3;} .clip.c3{flex:3;} .clip.c4{flex:2;}
+.clip::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 42%,rgba(255,255,255,.28) 50%,transparent 58%);transform:translateX(-130%);animation:clipShine 3.4s ease-in-out infinite;animation-play-state:paused;}
+.console.in .clip::after{animation-play-state:running;}
+.clip.c2::after{animation-delay:.4s;}.clip.c3::after{animation-delay:.8s;}.clip.c4::after{animation-delay:1.2s;}
+@keyframes clipShine{0%{transform:translateX(-130%);}45%,100%{transform:translateX(130%);}}
+
+.waveform{position:absolute;inset:0;display:flex;align-items:center;gap:2px;padding-left:42px;}
+.wb{flex:1;min-width:0;height:16%;background:linear-gradient(180deg,#6cc6ff,#2E86C4);border-radius:2px;opacity:.85;
+  animation:wave 1s ease-in-out infinite;animation-play-state:paused;}
+.console.in .wb{animation-play-state:running;}
+@keyframes wave{0%,100%{height:14%;}50%{height:var(--h,60%);}}
+
+.tl-playhead{position:absolute;top:24px;bottom:14px;left:2%;width:2px;z-index:5;
+  background:linear-gradient(180deg,var(--accent-bright),var(--accent));box-shadow:0 0 12px 2px rgba(62,180,247,.8);
+  animation:scrub 7s linear infinite;animation-play-state:paused;}
+.console.in .tl-playhead{animation-play-state:running;}
+.tl-playhead::before{content:"";position:absolute;top:-7px;left:-5px;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid var(--accent-bright);}
+@keyframes scrub{from{left:2%;}to{left:98.5%;}}
+
+/* reveal cascade */
+.console.in .eyebrow,.console.in .emblem,.console.in h2,.console.in .sub,.console.in .punch,.console.in .scarcity,.console.in .cta,.console.in .timeline{}
+.body > *{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1);}
+.console.in .body > *{opacity:1;transform:none;}
+.console.in .eyebrow{transition-delay:.15s;}
+.console.in .emblem{transition-delay:.26s;}
+.console.in h2{transition-delay:.40s;}
+.console.in .sub{transition-delay:.52s;}
+.console.in .punch{transition-delay:.62s;}
+.console.in .scarcity{transition-delay:.72s;}
+.console.in .cta{transition-delay:.82s;}
+.timeline{opacity:0;transform:translateY(16px);transition:opacity .7s ease .55s,transform .8s cubic-bezier(.2,.8,.2,1) .55s;}
+.console.in .timeline{opacity:1;transform:none;}
+.emblem svg{opacity:0;transform:scale(.6);}
+.console.in .emblem svg{animation:emblemIgnite .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:.3s;}
+@keyframes emblemIgnite{0%{opacity:0;transform:scale(.5);filter:drop-shadow(0 0 0 rgba(62,180,247,0));}55%{opacity:1;transform:scale(1.14);filter:drop-shadow(0 0 32px rgba(130,210,255,.95));}100%{opacity:1;transform:scale(1);filter:drop-shadow(0 0 18px rgba(62,180,247,.55));}}
+
+.hint{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted2);background:rgba(7,12,22,.8);padding:6px 12px;border-radius:999px;border:1px solid var(--line);}
+.replay{position:fixed;top:14px;right:16px;z-index:9;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(7,12,22,.85);padding:7px 13px;border-radius:999px;border:1px solid rgba(62,180,247,.3);cursor:pointer;}
+
+@media (max-width:720px){
+  .body{padding:34px 22px 28px;}
+  .topbar{font-size:10px;flex-wrap:wrap;gap:8px;}
+  .tl-tag{display:none;}
+  .waveform{padding-left:6px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .console,.body > *,.timeline,.emblem svg{opacity:1!important;transform:none!important;animation:none!important;}
+  .scan,.rec .d,.clip::after,.wb,.tl-playhead,.seat.pulse{animation:none!important;}
+}
+</style>
+</head>
+<body>
+<div class="bp"></div>
+<div class="hint">preview · scrolli per rivelare</div>
+<div class="replay" id="replay">&#8635; rivedi l'animazione</div>
+
+<div class="wrap">
+  <div class="console" id="studioos">
+    <div class="scan"></div>
+    <svg class="berg" viewBox="0 0 120 160" fill="none" stroke="#3EB4F7" stroke-width="1.5" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 64 L40 40 L50 50 L58 22 L66 44 L78 30 L92 64 L104 96 L84 134 L60 150 L40 132 L18 92 Z"/>
+      <path d="M58 22 L60 150" opacity=".5"/><path d="M30 64 L60 150" opacity=".4"/><path d="M92 64 L60 150" opacity=".4"/>
+      <path d="M14 64 L108 64" opacity=".85"/>
+    </svg>
+
+    <!-- editor top bar -->
+    <div class="topbar">
+      <div class="tb-left">
+        <span class="rec"><span class="d"></span>REC</span>
+        <span class="nm">studioos.edit</span>
+        <span class="tc" id="tc">00:00:12:00</span>
+      </div>
+      <span class="soldout"><span class="d"></span>SOLD OUT &middot; 8/8</span>
+    </div>
+
+    <!-- body -->
+    <div class="body">
+      <div class="eyebrow">il reparto creativo di oonee</div>
+
+      <div class="emblem">
+        <svg viewBox="0 0 58 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sAbove" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AA6DE"/><stop offset="1" stop-color="#2E6F9F"/></linearGradient>
+            <linearGradient id="sBelow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16456B"/><stop offset="1" stop-color="#07182B"/></linearGradient>
+          </defs>
+          <path d="M20 26 L24 12 L28 18 L31 6 L36 16 L40 26 Z" fill="url(#sAbove)"/>
+          <path d="M20 26 L40 26 L48 42 L40 55 L28 59 L16 53 L9 38 Z" fill="url(#sBelow)"/>
+          <path d="M20 26 L24 12 L28 18 L31 6 L36 16 L40 26 L48 42 L40 55 L28 59 L16 53 L9 38 Z" stroke="#5CC3FF" stroke-width="1.1"/>
+          <path d="M31 6 L28 59" stroke="#CFEBFF" stroke-width="1" opacity=".5"/>
+          <path d="M20 26 L28 59 M40 26 L28 59" stroke="#A9E0FF" stroke-width="1" opacity=".35"/>
+          <path d="M8 26 L48 26" stroke="#6CC6FF" stroke-width="1.6"/>
+        </svg>
+        <span class="wm">studioos</span>
+      </div>
+
+      <h2>Contenuti che vendono. <span class="g">Non contenuti che piacciono.</span></h2>
+      <p class="sub">Video, copy e creatività ingegnerizzati per un solo scopo: <b>convertire</b>. Ogni frame, ogni parola, ogni taglio è lì per farti vendere — non per fare like.</p>
+
+      <div class="punch">I like non pagano lo stipendio. Le vendite sì.</div>
+
+      <div class="scarcity">
+        <div class="seats">
+          <span class="seat"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span class="seat"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span class="seat"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span class="seat"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span class="seat"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span class="seat"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span class="seat"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span class="seat pulse"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        </div>
+        <p>Lavoriamo a <b>numero chiuso: 8 brand alla volta</b>, non uno di più. È il limite che ci permette di far vendere ognuno di loro. Oggi i posti sono esauriti.</p>
+      </div>
+
+      <a class="cta" href="#" onclick="return false;">Avvisami quando si libera un posto <span class="ar">&#8594;</span></a>
+    </div>
+
+    <!-- editing timeline -->
+    <div class="timeline">
+      <div class="tl-ruler"><span style="left:1%">00:00</span><span style="left:34%">00:05</span><span style="left:67%">00:10</span><span style="left:96%">00:15</span></div>
+      <div class="tl-row video">
+        <span class="tl-tag">VIDEO</span>
+        <div class="tl-track">
+          <div class="clip c1">Hook</div>
+          <div class="clip c2">Proof</div>
+          <div class="clip c3">Offer</div>
+          <div class="clip c4">CTA</div>
+        </div>
+      </div>
+      <div class="tl-row audio">
+        <span class="tl-tag">AUDIO</span>
+        <div class="tl-track"><div class="waveform" id="wf"></div></div>
+      </div>
+      <div class="tl-playhead"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* waveform bars */
+  var wf=document.getElementById('wf');
+  if(wf){for(var i=0;i<60;i++){var b=document.createElement('span');b.className='wb';
+    b.style.setProperty('--h',(28+Math.random()*68)+'%');
+    b.style.animationDelay=(-Math.random()*2).toFixed(2)+'s';
+    b.style.animationDuration=(0.75+Math.random()*0.9).toFixed(2)+'s';
+    wf.appendChild(b);}}
+
+  /* timecode */
+  var tcEl=document.getElementById('tc');
+  var frames=12*24, tcInt=null;
+  function pad(n){return (n<10?'0':'')+n;}
+  function fmt(f){var ff=f%24,s=Math.floor(f/24),ss=s%60,mm=Math.floor(s/60)%60,hh=Math.floor(s/3600);return pad(hh)+':'+pad(mm)+':'+pad(ss)+':'+pad(ff);}
+  function startTC(){stopTC();tcInt=setInterval(function(){frames++;if(tcEl)tcEl.textContent=fmt(frames);},42);}
+  function stopTC(){if(tcInt){clearInterval(tcInt);tcInt=null;}}
+
+  /* reveal */
+  var con=document.getElementById('studioos');
+  function fire(){con.classList.add('in');startTC();}
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){fire();io.unobserve(con);}});},{threshold:.25});
+    io.observe(con);
+  }else{fire();}
+
+  var rb=document.getElementById('replay');
+  if(rb)rb.addEventListener('click',function(){con.classList.remove('in');frames=12*24;if(tcEl)tcEl.textContent=fmt(frames);void con.offsetWidth;setTimeout(fire,60);});
+})();
+</script>
+</body>
+</html>

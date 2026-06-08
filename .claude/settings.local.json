@@ -99,7 +99,9 @@
       "Bash(git rm *)",
       "Bash(git commit -m ' *)",
       "Bash(curl -s \"http://localhost:3000\")",
-      "Bash(npx eslint *)"
+      "Bash(npx eslint *)",
+      "Bash(curl -sL \"https://www.oonee.it\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"https://www.oonee.it\")"
     ]
   }
 }
