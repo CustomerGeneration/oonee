@@ -107,7 +107,12 @@
       "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha public/nico-maiolini.png)",
       "Bash(grep -oE \"src=\\\\\"[^\\\\\"]{0,80}\" design-assets/oonee-chidietro-preview.html)",
       "Bash(python3 -c \"print\\('aspect 1028/1356 =', round\\(1028/1356,4\\)\\)\")",
-      "Bash(awk { if \\(length\\($0\\) > 2000\\) print NR\": <<BASE64 LINE, \"length\\($0\\)\" chars>>\"; else print NR\": \"$0 } *)"
+      "Bash(awk { if \\(length\\($0\\) > 2000\\) print NR\": <<BASE64 LINE, \"length\\($0\\)\" chars>>\"; else print NR\": \"$0 } *)",
+      "Bash(curl -s -o /dev/null -w \"home %{http_code}\\\\n\" \"https://www.oonee.it\")",
+      "Bash(curl -s -o /dev/null -w \"nico-maiolini.png %{http_code} \\(%{content_type}\\)\\\\n\" \"https://www.oonee.it/nico-maiolini.png\")",
+      "Bash(python3 -c \"print\\('aspect 1313/1279 =', round\\(1313/1279,4\\)\\)\")",
+      "Bash(grep -oE \"src=\\\\\"[^\\\\\"]{0,60}\" design-assets/oonee-chidietro-preview.html)",
+      "Bash(awk NR>=10 && NR<=49 { if \\(length\\($0\\) > 2000\\) print NR\": <<BASE64>>\"; else print NR\": \"$0 } *)"
     ]
   }
 }

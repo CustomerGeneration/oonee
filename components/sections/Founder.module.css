@@ -50,7 +50,7 @@
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 32px;
+  margin-bottom: 30px;
 }
 .eyebrow::after {
   content: "";
@@ -65,22 +65,22 @@
 /* ===== ritratto ===== */
 .portrait {
   position: relative;
-  width: min(440px, 84vw);
+  width: min(480px, 86vw);
   margin: 0 auto;
-  aspect-ratio: 1028 / 1356;
+  aspect-ratio: 1313 / 1279;
 }
 .glow {
   position: absolute;
   left: 50%;
-  top: 40%;
+  top: 36%;
   transform: translate(-50%, -50%);
-  width: 160%;
+  width: 150%;
   height: 150%;
   z-index: 0;
   pointer-events: none;
   background: radial-gradient(
-    circle at 54% 38%,
-    rgba(62, 180, 247, 0.4),
+    circle at 52% 30%,
+    rgba(62, 180, 247, 0.42),
     rgba(62, 180, 247, 0.1) 42%,
     transparent 70%
   );
@@ -105,7 +105,7 @@
 /* ===== blocco testo ===== */
 .aboutText {
   max-width: 600px;
-  margin: 26px auto 0;
+  margin: 22px auto 0;
   text-align: left;
 }
 .name {
